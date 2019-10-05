@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto|Work+Sans&display=swap');
+
+body {
+    background-color: #F2F5FB;
+    /*font-family: 'Raleway', sans-serif;*/
+    /*font-family: 'Roboto', sans-serif;*/
+    font-family: 'Work Sans', sans-serif !important;
+    /*font-size:1.1rem;*/
+    /*overflow:hidden !important;*/
+}
+
+nav {
+    background-color: #577ee8 !important;
+    padding: 15px !important;
+}
+
+.card {
+    border: none !important;
+}
+
+.shadow {
+    box-shadow: #DFE2E8 0px 8px 15px !important;
+}
+
+.card-img-top {
+
+}
+
+.btn {
+    border-radius: 30px;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+}
+
+.btn-primary {
+    background-color: #577ee8 !important;
+}
+
+.card-columns {
+    column-count: 4;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.form-center {
+    margin: auto;
+    width: 50%;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: transparent !important;
+    color: white !important;
+}
+
+.navbar-dark :active .navbar-toggler :active {
+    border-color: transparent !important;
+    color: white !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .form-center {
+        width: 100%;
+    }
+
+    .card-columns {
+        column-count: 1;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+    }
+
+    .card-list {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    .col-9, .col-3{
+        min-width: 100% !important;
+    }
+    .card-img{
+        width: 92%;
+    }
+
+    .navbar-nav li {
+        padding: 5px 25px 5px 25px;
+    }
+
+    .nav-item a {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .mob {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: flex;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+}
+.badge-dark{
+    /*background:#577ee8  !important;*/
+    /*color:#ffffff;*/
+    background: transparent;
+    color:#577ee8  !important;
+
+}

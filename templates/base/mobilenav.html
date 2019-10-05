@@ -1,0 +1,33 @@
+{% url 'home' as home_url %}
+{% url 'about' as about_url %}
+{% url 'contact' as contact_url %}
+{% url 'products:list' as products_url %}
+{% url 'cart:home' as cart_home %}
+{% url 'buyerlogin' as buyerlogin %}
+{% url 'buyerregistration' as buyerregistration %}
+{% url 'logout' as logout %}
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-bottom mobile-nav" align="center">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item {% if request.path == home_url %}active{% endif %} ">
+            <a class="nav-link" href="{{ home_url }}"> <i class="fas fa-home fa-lg"></i> </a>
+        </li>
+        <li class="nav-item {% if request.path == products_url %}active{% endif %}">
+            <a class="nav-link" href="{{ products_url }}"> <i class="fas fa-tshirt fa-lg"></i> </a>
+        </li>
+        <li class="nav-item {% if request.path == cart_home %}active{% endif %}">
+            <a class="nav-link" href="{{ cart_home }}">
+                <i class="fas fa-shopping-cart fa-lg"></i>
+                <span class="badge badge-pill badge-danger" style="{% if request.session.cart_items == 0 %}display:none;{% endif %}">
+                    {{ request.session.cart_items }}
+                </span>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="#">
+                <i class="fas fa-user fa-lg"></i>
+            </a>
+        </li>
+
+    </ul>
+</nav>

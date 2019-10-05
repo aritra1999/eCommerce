@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Cart</h1>
+
+    {% if cart.products.exists %}
+        <div class="row">
+            <div class="col-9 full">
+                {% for product in cart.products.all %}
+                    <a href='{{ product.get_absolute_url }}' target="_blank" class="">
+                        <div class="card mb-3 shadow">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="{{ product.image.url }}" class="card-img m-3" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body" style="padding:20px 40px 20px 40px;">
+                                        <h4 class="card-title text-dark font-weight-bold">
+                                            {{ product.title }}
+                                        </h4>
+                                        <p class="card-text text-dark">
+                                            {{ product.description }} Lorem ipsum dolor sit amet, consectetur
+                                            adipisicing elit. Asperiores culpa distinctio enim hic nam nostrum odit quos
+                                            tempore tenetur voluptates?
+                                        </p>
+                                        <h5 class="card-text text-dark"><i class="fas fa-rupee-sign"></i>
+                                            <strong>{{ product.price }} </strong></h5>
+                                        {#                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>#}
+                                        {% include 'products/update-cart.html' with product_id=product.id cart=cart in_cart=True %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                {% endfor %}
+            </div>
+            <div class="col-3 full">
+                <div class="card shadow">
+                    <div class="card-body" align="right">
+                        <h4 class="font-weight-bold" align="center">Order Summary</h4>
+                        <hr>
+                        {% for product in cart.products.all %}
+                            <p>+ {{ product.price }}</p>
+                        {% endfor %}
+
+                        <hr>
+                        <h5 class="font-weight-bold">Total: {{ cart.subtotal }}</h5>
+                            <p class="text-danger">Shipping Charges: + 50.00 </p>
+                        <br>
+                        <div align="center">
+                            <a class='btn btn-success btn-block' href='{% url "cart:checkout" %}' >Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <p class="lead">Cart is Empty</p>
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% url 'home' as home_url %}
+{% url 'about' as about_url %}
+{% url 'contact' as contact_url %}
+{% url 'products:list' as products_url %}
+{% url 'cart:home' as cart_home %}
+{% url 'buyerlogin' as buyerlogin %}
+{% url 'buyerregistration' as buyerregistration %}
+{% url 'logout' as logout %}
+
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand btn btn-warning" href="{{ home_url }}"><i class="fas fa-hat-wizard"></i> eComm.</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-search"></i>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto mob">
+                <li class="nav-item {% if request.path == home_url %}active{% endif %} ">
+                    <a class="nav-link" href="{{ home_url }}">Home </a>
+                </li>
+                <li class="nav-item {% if request.path == about_url %}active{% endif %}">
+                    <a class="nav-link" href="{{ about_url }}">About</a>
+                </li>
+                <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
+                    <a class="nav-link" href="{{ contact_url }}">Contact</a>
+                </li>
+                <li class="nav-item {% if request.path == products_url %}active{% endif %}">
+                    <a class="nav-link" href="{{ products_url }}">Products</a>
+                </li>
+            </ul>
+
+            {% include 'search/snippets/search-form.html' %}
+
+            {% if request.user.is_authenticated %}
+                <div class="dropdown">
+                    <ul class="navbar-nav mob">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ cart_home }}">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="badge badge-pill badge-danger">{{ request.session.cart_items }}</span>
+
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active ml-3" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ user.username }}
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Account</a>
+                                <a class="dropdown-item" href="{{ cart_home }}">Cart</a>
+
+                                <a class="dropdown-item" style="color: crimson"
+                                   href="{{ logout }}"><strong>Logout</strong></a>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ cart_home }}">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge badge-pill badge-danger">{{ request.session.cart_items }}</span>
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ buyerlogin }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ buyerregistration }}">Sign-Up</a>
+                    </li>
+                </ul>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>
+<br><br><br><br>

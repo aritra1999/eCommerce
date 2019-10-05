@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="form-center shadow">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title font-weight-bold" align="center">Login</h3>
+                <hr>
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                <form method="POST">{% csrf_token %}
+                    {{ form|crispy }}
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+                </form>
+
+                <br>
+                <p align="center">
+                    Don't have an account?
+                    <a href="{% url 'buyerregistration' %}">Sign-Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

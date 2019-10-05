@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if query %}
+        <div class="alert alert-success mb-4" role="alert">
+            Showing Results for {{ query }}.
+        </div>
+        <div class="card-columns" align="center">
+        {% for obj in object_list %}
+            <div class="card shadow mb-4">
+                <a href="{{ obj.get_absolute_url }}" target="_blank">
+                    <img src="{{ obj.image.url }}" class="card-img-top p-2" alt="...">
+                </a>
+                <div class="card-body">
+
+                    <h5 class="card-title"><strong>{{ obj.title }}</strong></h5>
+                    <h6 class="card-text">Rs. {{ obj.price }}</h6>
+                    {#                        <p class="card-text">{{ obj.description }}</p>#}
+                    <hr>
+                    <a href="{{ obj.get_absolute_url }}" class="btn btn-primary shadow" target="_blank">View Details</a>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+        <div class="alert alert-danger mb-4" role="alert">
+            Sorry no results matching your search.
+        </div>
+        <br>
+        <div class="container">
+            {% include 'search/snippets/search-form.html' %}
+        </div>
+        <br><br>
+    {% endif %}
+
+{% endblock %}

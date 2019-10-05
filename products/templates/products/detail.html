@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="card shadow mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-5">
+                <img src="{{ object.image.url }}" class="card-img m-2" alt="{{ object.title }}">
+
+            </div>
+            <div class="col-md-6">
+                <div class="card-body pl-5">
+
+                    <h3 class="card-title"><strong>{{ object.title }}</strong></h3>
+                    <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:15px;" align="right">{{ object.category }}</span>
+                    <br>
+                    <p class="card-text mt-3">
+                        Seller: {{ object.seller }}
+                    </p>
+                    <h5 class="card-text">
+                        <i class="fas fa-rupee-sign"></i> <strong> {{ object.price }}</strong>
+                    </h5>
+                    <p class="card-text">
+                        {% include 'products/update-cart.html' with product=object cart=cart in_cart=False %}
+                    </p>
+                    <p class="card-text">
+                        {{ object.description }}
+                            <br>
+                        Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Aliquid aspernatur culpa dolores doloribus, eaque error facere harum
+                        incidunt iure, laborum maxime nam officiis pariatur porro quaerat temporibus vel voluptatem
+                        voluptatum.
+                    </p>
+                    <hr>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda, atque cumque doloribus eos hic illo ipsa, ipsum minus molestiae nisi, sed sit vero. Eligendi fuga non quae sed voluptate.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

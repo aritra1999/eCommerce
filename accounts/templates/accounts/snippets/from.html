@@ -1,0 +1,26 @@
+{% load crispy_forms_tags %}
+<div class="form shadow">
+    <div class="card">
+        <div class="card-body">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="POST" action='{% if action_url %}{{ action_url }}{% else %}{% url "buyerlogin" %}{% endif %}'>{% csrf_token %}
+                {% if next_url %}
+                <input type='hidden' name='next' value='{{ next_url }}' />
+                {% endif %}
+                {{ form|crispy }}
+                <br>
+                <button type="submit" class="btn btn-primary btn-block">SUBMIT</button>
+            </form>
+            <br>
+            <p align="center">
+                Don't have an account?
+                <a href="{% url 'buyerregistration' %}">Sign-Up</a>
+            </p>
+        </div>
+    </div>
+</div>

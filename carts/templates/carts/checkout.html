@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if not billing_profile %}
+        <div class="row">
+            <div class="col" style="margin:10px;">
+                <h3 class="card-title font-weight-bold" align="center">Continue as guest</h3>
+                {% url "guest_register" as guest_register_url %}
+                {% include 'accounts/snippets/from.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_register_url %}
+            </div>
+            <div class="col" style="margin:10px;">
+                <h3 class="card-title font-weight-bold" align="center">Login</h3>
+                {% include 'accounts/snippets/from.html' with form=login_form next_url=request.build_absolute_uri %}
+            </div>
+        </div>
+    {% else %}
+        {% if not object.shipping_address %}
+            {% url "checkout_address_create" as checkout_address_create %}
+            <div class="form-center shadow">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title font-weight-bold" align="center">Shipping Address</h3>
+                        <hr>
+                        {% include 'addresses/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create address_type='shipping' %}
+                    </div>
+                </div>
+            </div>
+        {% elif not object.billing_address %}
+            {% url "checkout_address_create" as checkout_address_create %}
+            <div class="form-center shadow">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title font-weight-bold" align="center">Billing Address</h3>
+                        <hr>
+                        {% include 'addresses/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create address_type='billing' %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="card shadow" style="width: 90%;margin: auto;">
+                <div class="card-body" align="right">
+                    <h4 class="font-weight-bold" align="center">Place Order</h4>
+                    <hr>
+                    <p align="left"><strong>Email : </strong>{{ object.shipping_address }}</p>
+                    <p align="left">
+                        <strong>Shipping Address: </strong>
+                        {{ object.shipping_address.address_line_1 }},
+                        {{ object.shipping_address.city }},
+                        {{ object.shipping_address.state }},
+                        {{ object.shipping_address.country }}
+                    </p>
+                    <p align="left"><strong>Postl Code:</strong> {{ object.shipping_address.postal_code }}</p>
+                    <p align="left"><strong>Mode of Payment: </strong> Cash on Delivery</p>
+                    <hr>
+                    <p class="card-text"><strong>Cart Total:</strong> {{ object.cart.total }}</p>
+                    <p class="card-text"><strong>Shipping:</strong> {{ object.shipping_total }}</p>
+                    <h5 class="card-title font-weight-bold">Order Total: {{ object.total }}</h5>
+                    <hr>
+
+                    <form class="form" method="POST" action="">{% csrf_token %}
+                        <button type="submit" class="btn btn-success font-weight-bold shadow">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
