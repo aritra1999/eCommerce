@@ -117,5 +117,11 @@ a:hover {
     /*color:#ffffff;*/
     background: transparent;
     color:#577ee8  !important;
-
+}
+footer{
+    background: #1c2331 !important;
+    color: white !important;
+}
+footer a{
+    color: white;
 }

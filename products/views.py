@@ -3,6 +3,8 @@ from django.http import Http404
 
 from .models import Product
 from carts.models import Cart
+from django.shortcuts import redirect, render
+from .forms import AddProductFrom
 
 class ProductFeaturedListView(ListView):
     template_name = "products/list.html"
@@ -51,3 +53,13 @@ class ProductDetailView(DetailView):
         if instance is None:
             raise Http404("Product doesn't exist!")
         return instance
+
+def addproduct(request):
+    form = AddProductFrom()
+    context = {
+        "form": form
+    }
+    # instance = form.save(commit=False)
+    # return redirect("")
+    return render(request, "products/addproduct.html", context)
+

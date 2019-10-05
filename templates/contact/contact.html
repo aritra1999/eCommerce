@@ -3,14 +3,9 @@
 {% load static %}
 {% block content %}
 
- <div class="text-center">
-
- </div>
-
-    <div class="container">
-        <div class="form-center shadow">
-            <div class="card">
-                <div class="card-body">
+    <div class="form-center shadow">
+        <div class="card">
+            <div class="card-body">
                 <h3 class="card-title font-weight-bold" align="center">{{ content }}</h3>
                 <hr>
                 <form method="POST">{% csrf_token %}
