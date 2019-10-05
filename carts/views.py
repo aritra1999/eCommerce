@@ -10,7 +10,12 @@ from accounts.forms import LoginForm, GuestForm
 
 def cart_home(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
-    return render(request, "carts/home.html", {"cart": cart_obj})
+    product_list = Product.objects.all()
+    context = {
+        "cart": cart_obj,
+        "product_list":product_list,
+    }
+    return render(request, "carts/home.html", context)
 
 def cart_update(request):
     product_id = request.POST.get('product_id')
@@ -46,6 +51,8 @@ def checkout_home(request):
 
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
 
+    product_list = Product.objects.all()
+
     if billing_profile is not None:
         order_obj, order_obj_created = Order.objects.new_or_get(billing_profile, cart_obj)
         if shipping_address_id:
@@ -64,9 +71,10 @@ def checkout_home(request):
             order_obj.mark_paid()
             request.session['cart_items'] = 0
             del request.session['cart_id']
-            return redirect("/cart/success")
+            return redirect("cart:success")
 
     context = {
+        "product_list":product_list,
         "object": order_obj,
         "billing_profile": billing_profile,
         "login_form": login_form,
@@ -75,3 +83,8 @@ def checkout_home(request):
     }
     return render(request, "carts/checkout.html", context);
 
+def checkout_done_view(request):
+    context ={
+        "title": "eComm | Success",
+    }
+    return render(request, "carts/checkout-done.html", context)

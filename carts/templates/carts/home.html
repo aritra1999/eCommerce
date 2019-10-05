@@ -47,10 +47,10 @@
 
                         <hr>
                         <h5 class="font-weight-bold">Total: {{ cart.subtotal }}</h5>
-                            <p class="text-danger">Shipping Charges: + 50.00 </p>
+                        <p class="text-danger">Shipping Charges: + 50.00 </p>
                         <br>
                         <div align="center">
-                            <a class='btn btn-success btn-block' href='{% url "cart:checkout" %}' >Checkout</a>
+                            <a class='btn btn-success btn-block' href='{% url "cart:checkout" %}'>Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -58,8 +58,12 @@
         </div>
 
     {% else %}
-        <p class="lead">Cart is Empty</p>
-
+        <br>
+        <div class="alert alert-danger" role="alert">
+            Cart is Empty
+        </div>
     {% endif %}
+    <br><br>
+    {% include 'products/card-carousel.html' %}
 
 {% endblock %}
