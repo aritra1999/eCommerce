@@ -6,11 +6,25 @@ from products.models import Product
 
 def home_page(request):
     product_list = Product.objects.all()
-    context = {
-        "title": "Home",
-        "content": "Hello World",
-        "product_list": product_list,
-    }
+
+    seller = request.user
+
+    if seller.is_authenticated:
+        products = Product.objects.seller_product(seller)
+        context = {
+            "title": "Home",
+            "content": "Hello World",
+            "product_list": product_list,
+            "products": products,
+        }
+    else:
+
+        context = {
+            "title": "Home",
+            "content": "Hello World",
+            "product_list": product_list,
+        }
+
     return render(request, "home_page.html", context)
 
 

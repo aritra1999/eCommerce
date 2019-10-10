@@ -4,21 +4,23 @@
         <div class="alert alert-success mb-4" role="alert">
             Showing Results for {{ query }}.
         </div>
-        <div class="card-columns" align="center">
+        <div class="card-columns" >
         {% for obj in object_list %}
-            <div class="card shadow mb-4">
+            <div class="card border-secondary card-list shadow mb-4">
                 <a href="{{ obj.get_absolute_url }}" target="_blank">
-                    <img src="{{ obj.image.url }}" class="card-img-top p-2" alt="...">
+                    <img src="{{ obj.image.url }}" class="card-img p-2" alt="...">
                 </a>
                 <div class="card-body">
-
-                    <h5 class="card-title"><strong>{{ obj.title }}</strong></h5>
-                    <h6 class="card-text">Rs. {{ obj.price }}</h6>
-                    {#                        <p class="card-text">{{ obj.description }}</p>#}
+                    <h5 class="card-title">
+                        <strong>{{ obj.title }}</strong>
+                        <br>
+                        <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:12px;" align="right">{{ obj.category }}</span>
+                    </h5>
+                    <p><strong>Seller:</strong>&nbsp;{{ obj.seller }}&nbsp;</p>
                     <hr>
-                    <a href="{{ obj.get_absolute_url }}" class="btn btn-primary shadow" target="_blank">View Details</a>
-                </div>
+                    <h5 class="card-text">Rs. {{ obj.price }}</h5>
 
+                </div>
             </div>
         {% endfor %}
 

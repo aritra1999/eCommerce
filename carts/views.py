@@ -81,7 +81,7 @@ def checkout_home(request):
         "guest_form": guest_form,
         "address_form": address_form,
     }
-    return render(request, "carts/checkout.html", context);
+    return render(request, "carts/checkout.html", context)
 
 def checkout_done_view(request):
     context ={

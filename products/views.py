@@ -1,10 +1,13 @@
 from django.views.generic import ListView, DetailView
 from django.http import Http404
+from django.shortcuts import redirect, render
+from django.contrib.auth import get_user_model
 
 from .models import Product
-from carts.models import Cart
-from django.shortcuts import redirect, render
+from store.models import Store
 from .forms import AddProductFrom
+from carts.models import Cart
+
 
 class ProductFeaturedListView(ListView):
     template_name = "products/list.html"
@@ -19,7 +22,6 @@ class ProductFeaturedDetailView(DetailView):
     template_name = "products/featured-detail.html"
 
 
-
 class ProductDetailSlugView(DetailView):
     queryset = Product.objects.all()
     template_name = "products/detail.html"
@@ -30,6 +32,7 @@ class ProductDetailSlugView(DetailView):
         context['cart'] = cart_obj
         return context
 
+
 class ProductListView(ListView):
     queryset = Product.objects.all()
     template_name = "products/list.html"
@@ -38,11 +41,12 @@ class ProductListView(ListView):
         request = self.request
         return Product.objects.all()
 
+
 class ProductDetailView(DetailView):
     queryset = Product.objects.all()
     template_name = "products/detail.html"
 
-    def get_context_data(self, *args,**kwargs):
+    def get_context_data(self, *args, **kwargs):
         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
         return context
 
@@ -54,12 +58,32 @@ class ProductDetailView(DetailView):
             raise Http404("Product doesn't exist!")
         return instance
 
-def addproduct(request):
-    form = AddProductFrom()
-    context = {
-        "form": form
-    }
-    # instance = form.save(commit=False)
-    # return redirect("")
-    return render(request, "products/addproduct.html", context)
 
+User = get_user_model()
+
+
+def addproduct(request):
+    if request.user.is_authenticated:
+        user_type = request.user.user_type
+        if user_type == 'seller':
+            form = AddProductFrom(request.POST or None, request.FILES or None)
+            context = {
+                "form": form,
+                "title": "Add Product",
+            }
+
+            username = request.user.username
+            username_instance = User.objects.get(username=username)
+            store_name_instance = Store.objects.get(owner=username_instance)
+
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.seller = username_instance
+                instance.store_name = store_name_instance
+                instance.save()
+                return redirect("/")
+            else:
+                print("Debug: ", form.errors)
+            return render(request, "products/addproduct.html", context)
+        return redirect("/products/")
+    return redirect("/products/")

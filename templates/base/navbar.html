@@ -6,7 +6,7 @@
 {% url 'buyerlogin' as buyerlogin %}
 {% url 'buyerregistration' as buyerregistration %}
 {% url 'logout' as logout %}
-
+{% url 'addproduct' as add_product_url %}
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
@@ -21,15 +21,21 @@
                 <li class="nav-item {% if request.path == home_url %}active{% endif %} ">
                     <a class="nav-link" href="{{ home_url }}">Home </a>
                 </li>
-                <li class="nav-item {% if request.path == about_url %}active{% endif %}">
-                    <a class="nav-link" href="{{ about_url }}">About</a>
-                </li>
-                <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
-                    <a class="nav-link" href="{{ contact_url }}">Contact</a>
-                </li>
+{#                <li class="nav-item {% if request.path == about_url %}active{% endif %}">#}
+{#                    <a class="nav-link" href="{{ about_url }}">About</a>#}
+{#                </li>#}
+{#                <li class="nav-item {% if request.path == contact_url %}active{% endif %}">#}
+{#                    <a class="nav-link" href="{{ contact_url }}">Contact</a>#}
+{#                </li>#}
                 <li class="nav-item {% if request.path == products_url %}active{% endif %}">
                     <a class="nav-link" href="{{ products_url }}">Products</a>
                 </li>
+
+                {% if user.user_type == "seller" %}
+                    <li class="nav-item {% if request.path == add_product_url %}active{% endif %}">
+                        <a class="nav-link" href="{{ add_product_url }}">Add Product</a>
+                    </li>
+                {% endif %}
             </ul>
 
             {% include 'search/snippets/search-form.html' %}

@@ -15,7 +15,7 @@ class BillingProfileManager(models.Manager):
             obj, created = self.model.objects.get_or_create(user=user, email=user.email)
         elif guest_email_id is not None:
             guest_email_obj = GuestEmail.objects.get(id=guest_email_id)
-            obj, reated = self.model.objects.get_or_create(
+            obj, created = self.model.objects.get_or_create(
                 email=guest_email_obj.email)
         else:
             pass

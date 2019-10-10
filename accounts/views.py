@@ -27,7 +27,7 @@ def guest_register_view(request):
             return redirect("/cart/checkout/")
     return redirect("/cart/checkout/")
 
-
+User = get_user_model()
 def login_page(request):
     form = LoginForm(request.POST or None)
     context = {
@@ -39,7 +39,8 @@ def login_page(request):
     if form.is_valid():
         username  = form.cleaned_data.get("username")
         password  = form.cleaned_data.get("password")
-        user = authenticate(request, username=username, password=password)
+
+        user = authenticate(request, username=username  , password=password)
         if user is not None:
             login(request, user)
             try:
@@ -49,7 +50,11 @@ def login_page(request):
             if is_safe_url(redirect_path, request.get_host()):
                 return redirect(redirect_path)
             else:
-                return redirect("/")
+                qs = User.objects.get(username=username)
+                if qs.user_type == "buyer":
+                    return redirect("/products/")
+                else:
+                    return redirect("/")
         else:
             print("Error")
             context["error"] = "Username and Password do not match!"
@@ -57,7 +62,7 @@ def login_page(request):
 
 # admin abc*1234
 
-User = get_user_model()
+
 def register_page(request):
     form = RegisterForm(request.POST or None)
     context = {
@@ -66,10 +71,15 @@ def register_page(request):
         "form": form
     }
     if form.is_valid():
-        print(form.cleaned_data)
+        name = form.cleaned_data.get("name")
         email = form.cleaned_data.get("email")
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
-        new_user = User.objects.create_user(username, email, password)
+        user_type = form.cleaned_data.get("user_type")
+        new_user = User.objects.create_user( email, username, name, user_type, password)
 
+        if user_type == "seller":
+            request.session['username'] = username
+            return redirect("/sell/")
+        return redirect("/login/")
     return render(request, "accounts/register.html", context)
