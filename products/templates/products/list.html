@@ -2,25 +2,27 @@
 {% block content %}
     <div class="card-columns">
         {% for obj in object_list %}
-
-            <div class="card border-secondary card-list shadow mb-4">
-                <a href="{{ obj.get_absolute_url }}" target="_blank">
+            <a href="{{ obj.get_absolute_url }}" target="_blank" style="color: black !important;">
+                <div class="card border-secondary card-list shadow mb-4">
+                    {#                <a href="{{ obj.get_absolute_url }}" target="_blank">#}
                     <img src="{{ obj.image.url }}" class="card-img p-2" alt="...">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <strong>{{ obj.title }}</strong>
-                        <br>
-                        <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:12px;"
-                              align="right">{{ obj.category }}</span>
-                        {#                        <span class="badge badge-pill badge-danger pr-2 pl-2" style="font-size:12px;" align="right">{{ obj.color }}</span>#}
-                    </h5>
-                    <p><strong>Seller:</strong>&nbsp;{{ obj.store_name }}&nbsp;</p>
-                    <hr>
-                    <h5 class="card-text">Rs. {{ obj.price }}</h5>
+                    {#                </a>#}
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <strong>{{ obj.title }}</strong>
+                            <br>
+                            <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:12px;"
+                                  align="right">{{ obj.category }}</span>
+                            {#                        <span class="badge badge-pill badge-danger pr-2 pl-2" style="font-size:12px;" align="right">{{ obj.color }}</span>#}
+                        </h5>
+                        <p><strong>Store:</strong>&nbsp;{{ obj.store_name }}&nbsp;</p>
+                        <hr>
+                        <h5 class="card-text">Rs. {{ obj.price }}</h5>
 
+                    </div>
                 </div>
-            </div>
+            </a>
+
         {% endfor %}
     </div>
 

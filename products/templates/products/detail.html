@@ -10,29 +10,34 @@
             <div class="col-md-6">
                 <div class="card-body pl-5">
 
-                    <h3 class="card-title"><strong>{{ object.title }}</strong></h3>
-                    <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:15px;" align="right">{{ object.category }}</span>
-                    <br>
-                    <p class="card-text mt-3">
-                        Seller: {{ object.seller }}
-                    </p>
+                    <h3 class="card-title" style="display: inline"><strong>{{ object.title }}</strong></h3>
+                    <span class="badge badge-pill badge-success float-right pb-lg-1 mt-2"
+                          style="font-size:14px;display: inline;"
+                          align="right">{{ object.category }}</span>
+                    <hr>
+
                     <h5 class="card-text">
                         <i class="fas fa-rupee-sign"></i> <strong> {{ object.price }}</strong>
                     </h5>
                     <p class="card-text">
                         {% include 'products/update-cart.html' with product=object cart=cart in_cart=False %}
                     </p>
+                    <div class="card-text alert alert-primary shadow" role="alert">
+                        <strong>Seller: </strong> {{ object.seller }}
+                        <hr>
+                        <strong>Store: </strong> {{ store.store_name }}
+                        <hr>
+                        <strong>Store address: </strong> {{ store.address }}<br>
+                        {{ store.city }} - {{ store.postal_code }}<br>
+                        {{ store.state }}<br>
+                        {{ store.country }}<br>
+                        <a role="button" class="btn btn-dark float-right shadow" href="">View Store</a>
+                    </div>
+                    <br>
                     <p class="card-text">
                         {{ object.description }}
-                            <br>
-                        Lorem ipsum dolor sit amet, consectetur
-                        adipisicing elit. Aliquid aspernatur culpa dolores doloribus, eaque error facere harum
-                        incidunt iure, laborum maxime nam officiis pariatur porro quaerat temporibus vel voluptatem
-                        voluptatum.
                     </p>
-                    <hr>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam assumenda, atque cumque doloribus eos hic illo ipsa, ipsum minus molestiae nisi, sed sit vero. Eligendi fuga non quae sed voluptate.</p>
                 </div>
             </div>
         </div>

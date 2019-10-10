@@ -182,4 +182,6 @@ footer a {
 .carousel-inner .carousel-item-left {
     transform: translateX(0);
 }
-
+.alert-primary{
+    background-color: #ebf5ff !important;
+}

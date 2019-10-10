@@ -16,17 +16,25 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body" style="padding:20px 40px 20px 40px;">
-                                        <h4 class="card-title text-dark font-weight-bold">
+                                        <h4 class="card-title text-dark font-weight-bold" style="display: inline;">
                                             {{ product.title }}
                                         </h4>
+                                        <span class="badge badge-pill badge-success pr-2 pl-2 float-right" style="font-size:13px;display: inline;"
+                                              align="right">{{ product.category }}</span>
+                                        <hr>
+                                        <div class="alert alert-primary mt-3" role="alert">
+                                            <p class="card-text text-dark">
+                                                Seller: {{ product.seller }}
+                                                <br>
+                                                Store: {{ product.store_name }}
+                                            </p>
+                                        </div>
                                         <p class="card-text text-dark">
-                                            {{ product.description }} Lorem ipsum dolor sit amet, consectetur
-                                            adipisicing elit. Asperiores culpa distinctio enim hic nam nostrum odit quos
-                                            tempore tenetur voluptates?
+                                            {{ product.description|truncatewords:20 }}
                                         </p>
                                         <h5 class="card-text text-dark"><i class="fas fa-rupee-sign"></i>
                                             <strong>{{ product.price }} </strong></h5>
-                                        {#                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>#}
+                                        <hr>
                                         {% include 'products/update-cart.html' with product_id=product.id cart=cart in_cart=True %}
                                     </div>
                                 </div>
@@ -46,7 +54,7 @@
                         {% endfor %}
 
                         <hr>
-                        <h5 class="font-weight-bold">Total: {{ cart.subtotal }}</h5>
+                        <h5 class="font-weight-bold">Sub Total: {{ cart.subtotal }}</h5>
                         <p class="text-danger">Shipping Charges: + 50.00 </p>
                         <br>
                         <div align="center">

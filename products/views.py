@@ -42,22 +42,44 @@ class ProductListView(ListView):
         return Product.objects.all()
 
 
-class ProductDetailView(DetailView):
-    queryset = Product.objects.all()
-    template_name = "products/detail.html"
+# class ProductDetailView(DetailView):
+#     queryset = Product.objects.all()
+#     template_name = "products/detail.html"
+#
+#     def get_context_data(self, *args, **kwargs):
+#         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
+#         context['object'] = Product.objects.all()
+#         context['store'] = Store.objects.get(owner='admin')
+#         return context
+#
+#     def get_object(self, *args, **kwargs):
+#         request = self.request
+#         pk = self.kwargs.get('pk')
+#         instance = Product.objects.get_by_id(pk)
+#         if instance is None:
+#             raise Http404("Product doesn't exist!")
+#         return instance
+#
+#     # def get_store(self, *args, **kwargs):
+#     #     request = self.request
+#     #
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
-        return context
+def product_detail_view(request, slug=None, *args, **kwargs):
+    instance = Product.objects.get(slug=slug)
+    if instance is None:
+        raise Http404("Product doesn't exist")
 
-    def get_object(self, *args, **kwargs):
-        request = self.request
-        pk = self.kwargs.get('pk')
-        instance = Product.objects.get_by_id(pk)
-        if instance is None:
-            raise Http404("Product doesn't exist!")
-        return instance
+    owner = instance.seller
+    store = Store.objects.get(owner=owner)
+    cart, new = Cart.objects.new_or_get(request)
 
+    print(cart)
+    context = {
+        "object":instance,
+        "store":store,
+        "cart":cart,
+    }
+    return render(request, "products/detail.html", context)
 
 User = get_user_model()
 

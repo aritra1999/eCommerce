@@ -28,7 +28,7 @@ class OrderManger(models.Manager):
 
 class Order(models.Model):
     billing_profile     = models.ForeignKey(BillingProfile, null=True, blank=True, on_delete=models.CASCADE)
-    shipping_address    = models.ForeignKey(Address, related_name="shipping_address", null=True, blank=True, on_delete=models.CASCADE)
+    # shipping_address    = models.ForeignKey(Address, related_name="shipping_address", null=True, blank=True, on_delete=models.CASCADE)
     billing_address     = models.ForeignKey(Address, related_name="billing_address", null=True, blank=True, on_delete=models.CASCADE)
     order_id            = models.CharField(max_length=20, blank=True)
     cart                = models.ForeignKey(Cart, on_delete=models.CASCADE)
@@ -53,10 +53,11 @@ class Order(models.Model):
 
     def check_done(self):
         billing_profile = self.billing_profile
-        shipping_address = self.shipping_address
+        # shipping_address = self.shipping_address
         billing_address = self.billing_address
         total = self.total
-        if billing_profile and shipping_address and billing_address and total>0:
+        # if billing_profile and shipping_address and billing_address and total>0:
+        if billing_profile and billing_address and total>0:
             return True
         return False
 
