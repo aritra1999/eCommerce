@@ -1,11 +1,10 @@
 $('#recipeCarousel').carousel({
     interval: 10000
-
-})
+});
 
 $('.carousel .carousel-item').each(function () {
     var next = $(this).next();
-
+    var itemsPerSlide = 4;
     if (!next.length) {
         next = $(this).siblings(':first');
     }
@@ -18,11 +17,12 @@ $('.carousel .carousel-item').each(function () {
     }
 });
 
+
 function openNav() {
-  document.getElementById("mySidenav").style.width = "300px";
+    document.getElementById("mySidenav").style.width = "300px";
 }
 
 /* Set the width of the side navigation to 0 */
 function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.width = "0";
 }
