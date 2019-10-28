@@ -28,7 +28,6 @@ class OrderManger(models.Manager):
 
 class Order(models.Model):
     billing_profile     = models.ForeignKey(BillingProfile, null=True, blank=True, on_delete=models.CASCADE)
-    # shipping_address    = models.ForeignKey(Address, related_name="shipping_address", null=True, blank=True, on_delete=models.CASCADE)
     billing_address     = models.ForeignKey(Address, related_name="billing_address", null=True, blank=True, on_delete=models.CASCADE)
     order_id            = models.CharField(max_length=20, blank=True)
     cart                = models.ForeignKey(Cart, on_delete=models.CASCADE)
@@ -66,6 +65,8 @@ class Order(models.Model):
             self.status = "paid"
             self.save()
         return self.status
+
+# class Placed =
 
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:

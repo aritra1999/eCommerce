@@ -35,10 +35,14 @@ nav {
 }
 
 .btn-primary {
-    background-color: #577ee8 !important;
+    background-color: #3e5be8 !important;
 }
 
 .card-columns {
+    column-count: 4;
+}
+
+.card-deck {
     column-count: 4;
 }
 
@@ -73,56 +77,16 @@ a:hover {
     color: white !important;
 }
 
-@media only screen and (max-width: 768px) {
-    .form-center {
-        width: 100%;
-    }
-
-    .card-columns {
-        column-count: 1;
-    }
-
-    .navbar-nav {
-        display: flex;
-        flex-direction: row;
-        margin: auto;
-    }
-
-    .card-list {
-        display: grid;
-        grid-template-columns: 50% 50%;
-    }
-
-    .col-9, .col-3 {
-        min-width: 100% !important;
-    }
-
-    .card-img {
-        width: 92%;
-    }
-
-    .navbar-nav li {
-        padding: 5px 25px 5px 25px;
-    }
-
-    .nav-item a {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .mob {
-        display: none;
-    }
-
-    .mobile-nav {
-        display: flex;
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-    }
-
-    footer {
-        /*display: none;*/
-    }
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 70px;
+    width: 18%;
+    padding: 20px;
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    z-index: 1000;
+    background-color: white;
 }
 
 .badge-dark {
@@ -159,22 +123,17 @@ footer a {
     display: flex;
 }
 
-
-
 @media (min-width: 768px) {
-
     .carousel-inner .carousel-item-right.active,
     .carousel-inner .carousel-item-next {
         /*transform: translateX(33.333%);*/
         transform: translateX(25%);
-
     }
 
     .carousel-inner .carousel-item-left.active,
     .carousel-inner .carousel-item-prev {
         /*transform: translateX(-33.333%);*/
         transform: translateX(-25%);
-
     }
 }
 
@@ -182,6 +141,337 @@ footer a {
 .carousel-inner .carousel-item-left {
     transform: translateX(0);
 }
-.alert-primary{
+
+.alert-primary {
     background-color: #ebf5ff !important;
+}
+
+.add-product {
+    position: fixed;
+    font-weight: bold;
+    bottom: 20px;
+    z-index: 10;
+    right: 20px;
+}
+
+.add-product a {
+    color: black;
+}
+
+.list-img {
+    height: 300px;
+}
+
+.nav-link {
+    color: white;
+}
+
+.activemob {
+    color: #ffc107 !important;
+}
+
+.list-img img {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    /*-ms-transform: translateY(-50%);*/
+    /*transform: translateY(-50%);*/
+}
+
+.table td, .table th {
+    padding: 6px !important;
+}
+
+.mini-nav {
+    margin-top: 70px;
+    padding: 2px;
+    background: #6351ce;
+    /*background: #0c1131;*/
+    position: fixed;
+    color: white;
+    z-index: 10;
+    min-width: 100%;
+    text-align: center;
+}
+
+.mini-nav a {
+    color: white;
+}
+
+.search-btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    background-color: #ffc107;
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-top-right-radius: .35rem;
+    border-bottom-right-radius: .35rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-control {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 0.5px solid rgba(61, 61, 61, 0.58);
+    border-radius: 0px;
+}
+
+.search-form {
+    display: block;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.search-form input {
+    border: none !important;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus
+    /*button:focus,*/
+    /*button:active,*/
+    /*button:hover,*/
+    /*label:focus,*/
+    /*.btn:active,*/
+    /*.btn.active*/
+{
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+}
+
+.form-btn {
+    padding-right: 50px !important;
+    padding-left: 50px !important;
+}
+
+.bottom-nav {
+    background-color: #1c2331;
+    position: fixed;
+    bottom: 10px;
+    /*vertical-align: middle;*/
+    border-radius: 40px;
+    padding: 10px;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.bottom-nav ul {
+    margin-bottom: 0rem;
+}
+
+/*.list-inline-item {*/
+/*    margin-right: 14px !important;*/
+/*    margin-left: 14px !important;*/
+/*}*/
+
+
+.bottom-container {
+    /*margin: 0 auto;*/
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding: 20px;
+}
+
+.dropdown-menu a {
+    color: black !important;
+}
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: #ffffff; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 30px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 15px 15px 11px 18px;
+    position: fixed;
+    right: 0;
+    top: 150px;
+    background-color: #ffc107;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .notmob {
+        display: none;
+
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .form-center {
+        width: 100%;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .card-columns {
+        column-count: 1;
+
+    }
+
+    .list-img {
+        height: 200px;
+    }
+
+    .carousel-img {
+        height: 350px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+    }
+
+    .card-list {
+        display: grid;
+        grid-template-columns: 50% 50%;
+
+    }
+
+    .list-card {
+        margin-bottom: 10px !important;
+
+    }
+
+    .col-9, .col-3 {
+        min-width: 100% !important;
+    }
+
+    .card-img {
+        width: 92%;
+    }
+
+    .bottom-link li {
+        padding: 5px 35px 5px 25px;
+    }
+
+    .cart-link {
+        margin-right: 15px !important;
+    }
+
+    .nav-item a {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .mob {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: flex;
+        margin: 6px;
+        border-radius: 1000px;
+        padding-top: 0px !important;
+        padding-bottom: 7px !important;
+    }
+
+    .list-card {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    footer {
+        /*display: none;*/
+    }
+
+    .mobile-top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px;
+        background-color: #1b1e21;
+    }
+
+    .mobile-nav a {
+        color: white !important;
+    }
+
+    .search-form {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
+        margin-top: 54px !important;
+        width: 93%;
+        border-radius: .35rem;
+        box-shadow: 3px 4px 12px -3px #102e4c29;
+    }
+
+    .add-product {
+        font-weight: bold;
+        z-index: 10;
+    }
 }

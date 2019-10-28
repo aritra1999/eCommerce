@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-    {% if query %}
-        <div class="alert alert-success mb-4" role="alert">
-            Showing Results for {{ query }}.
+
+    {% if object_list.count > 0 %}
+        <div class="alert alert-primary mb-4 shadow" role="alert">
+            Showing {{ object_list.count }} results for <strong>{{ query }}</strong>.
         </div>
         <div class="card-columns" >
         {% for obj in object_list %}
-            <div class="card border-secondary card-list shadow mb-4">
+            <div class="card border-secondary card-list shadow ">
                 <a href="{{ obj.get_absolute_url }}" target="_blank">
                     <img src="{{ obj.image.url }}" class="card-img p-2" alt="...">
                 </a>
@@ -27,12 +28,9 @@
     </div>
     {% else %}
         <div class="alert alert-danger mb-4" role="alert">
-            Sorry no results matching your search.
+            Sorry no results found for <strong>{{ query }}</strong>.
         </div>
         <br>
-        <div class="container">
-            {% include 'search/snippets/search-form.html' %}
-        </div>
         <br><br>
     {% endif %}
 

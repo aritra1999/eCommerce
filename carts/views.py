@@ -7,7 +7,9 @@ from .models import Cart
 from addresses.forms import AddressForm
 from addresses.models import Address
 from accounts.forms import LoginForm, GuestForm
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 def cart_home(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     product_list = Product.objects.all()
@@ -75,6 +77,15 @@ def checkout_home(request):
             del request.session['cart_id']
             return redirect("cart:success")
 
+    if request.user.is_authenticated:
+        old_billing_profile = BillingProfile.objects.get(user=request.user)
+        old_addresses = Address.objects.filter(billing_profile=old_billing_profile)
+    else:
+        old_addresses = ""
+
+
+    # cart_qs = Cart.objects.get(user=request.user)
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
 
     context = {
         "product_list":product_list,
@@ -83,14 +94,20 @@ def checkout_home(request):
         "login_form": login_form,
         "guest_form": guest_form,
         "address_form": address_form,
+        "old_addresses":old_addresses,
+        "cart":cart_obj,
 
     }
     return render(request, "carts/checkout.html", context)
 
 def checkout_done_view(request):
     obj = Product.objects.all()
+    cart = Cart.objects.all()
+    product_list = Product.objects.all()
     context ={
         "title": "eComm | Success",
         "obj": obj,
+        "product_list": product_list,
+        # "cart": cart,
     }
     return render(request, "carts/checkout-done.html", context)

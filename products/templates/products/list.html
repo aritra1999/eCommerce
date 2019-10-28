@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="card-columns">
+
         {% for obj in object_list %}
             <a href="{{ obj.get_absolute_url }}" target="_blank" style="color: black !important;">
-                <div class="card border-secondary card-list shadow mb-4">
-                    {#                <a href="{{ obj.get_absolute_url }}" target="_blank">#}
-                    <img src="{{ obj.image.url }}" class="card-img p-2" alt="...">
-                    {#                </a>#}
-                    <div class="card-body">
+                <div class="card border-secondary shadow mb-4 list-card">
+                    <div class="list-img">
+                        <img src="{{ obj.image.url }}" class="card-img p-2" alt="...">
+                    </div>
+                    <div class="card-body list-card-body">
                         <h5 class="card-title">
                             <strong>{{ obj.title }}</strong>
                             <br>
@@ -25,5 +26,157 @@
 
         {% endfor %}
     </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <h4 align="center" class="font-weight-bold">Filters</h4>
+        <hr>
+        <div class="pr-4 pl-4">
+            <h5 class="font-weight-bold">Colour</h5>
+            <table class="table-borderless">
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="custom-control custom-checkbox m-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheckredmob">
+                            <label class="custom-control-label" for="customCheckredmob">
+                                Red
+                            </label>
+                        </div>
+                    </td>
+                    <td><i class="fas fa-stop" style="color: red !important;"></i></td>
+                    <td>
+                        <div class="custom-control custom-checkbox m-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheckgreenmob">
+                            <label class="custom-control-label" for="customCheckgreenmob">
+                                Green
+                            </label>
+                        </div>
+                    </td>
+                    <td><i class="fas fa-stop" style="color: #18ff27 !important;"></i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="custom-control custom-checkbox m-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheckblackmob">
+                            <label class="custom-control-label" for="customCheckblackmob">
+                                Black
+                            </label>
+                        </div>
+                    </td>
+                    <td><i class="fas fa-stop" style="color: black !important;"></i></td>
+                    <td>
+                        <div class="custom-control custom-checkbox m-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1mob">
+                            <label class="custom-control-label" for="customCheckmob1">
+                                Gery
+                            </label>
+                        </div>
+                    </td>
+                    <td><i class="fas fa-stop" style="color: grey !important;"></i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="custom-control custom-checkbox m-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheckbluemob">
+                            <label class="custom-control-label" for="customCheckbluemob">
+                                Blue
+                            </label>
+                        </div>
+                    </td>
+                    <td><i class="fas fa-stop" style="color: #0f4cb9 !important;"></i></td>
+                    <td>
+                        <div class="custom-control custom-checkbox m-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1mob">
+                            <label class="custom-control-label" for="customCheck1mob">
+                                Orange
+                            </label>
+                        </div>
+                    </td>
+                    <td><i class="fas fa-stop" style="color: orange !important;"></i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="custom-control custom-checkbox m-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheckyellowmob">
+                            <label class="custom-control-label" for="customCheckyellowmob">
+                                Yellow
+                            </label>
+                        </div>
+                    </td>
+                    <td><i class="fas fa-stop" style="color: yellow !important;"></i></td>
+                    <td>
+                        <div class="custom-control custom-checkbox m-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheckvioletmob">
+                            <label class="custom-control-label" for="customCheckvioletmob">
+                                Violet
+                            </label>
+                        </div>
+                    </td>
+                    <td><i class="fas fa-stop" style="color: #7F00FF !important;"></i></td>
+                </tr>
+                </tbody>
+            </table>
+            <label class="font-weight-bold">Enter custom color</label>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter color">
+            </div>
+        </div>
+        {#        <hr>#}
+        <div class="pr-4 pl-4">
+            <h5 class="font-weight-bold">Category</h5>
+            <div class="custom-control custom-checkbox m-2">
+                <input type="checkbox" class="custom-control-input" id="customCheck5mob">
+                <label class="custom-control-label" for="customCheck5mob">
+                    Shirt
+                </label>
+            </div>
+            <div class="custom-control custom-checkbox m-2">
+                <input type="checkbox" class="custom-control-input" id="customCheck5mob">
+                <label class="custom-control-label" for="customCheck5mob">
+                    T-Shirt
+                </label>
+            </div>
+            <div class="custom-control custom-checkbox m-2">
+                <input type="checkbox" class="custom-control-input" id="customCheck6mob">
+                <label class="custom-control-label" for="customCheck6mob">
+                    Hat
+                </label>
+            </div>
+            <div class="custom-control custom-checkbox m-2">
+                <input type="checkbox" class="custom-control-input" id="customCheck7mob">
+                <label class="custom-control-label" for="customCheck7mob">
+                    Shoes
+                </label>
+            </div>
+            <label class="font-weight-bold">Enter custom category</label>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter category">
+            </div>
+        </div>
+        {#        <hr>#}
+        <div class="pr-4 pl-4">
+            <h5 class="font-weight-bold">Price</h5>
+            <label class="font-weight-bold">Enter price range</label>
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="From">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="To">
+                </div>
+            </div>
+        </div>
+        <div class="apply mt-3" align="center">
+            <button type="button" class="btn btn-primary pl-5 pr-5 shadow" style="min-width: 200px;">Apply Filters
+            </button>
+        </div>
+        <br><br>
+    </div>
+
+    <div id="main" class="sidenav-button"  style="cursor:pointer" onclick="openNav()">
+        <i class="fas fa-filter"></i>
+    </div>
+
 
 {% endblock %}

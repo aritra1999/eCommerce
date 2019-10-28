@@ -8,7 +8,7 @@
 {% url 'logout' as logout %}
 {% url 'addproduct' as add_product_url %}
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top mob">
     <div class="container">
         <a class="navbar-brand btn btn-warning" href="{{ home_url }}"><i class="fas fa-hat-wizard"></i> eComm.</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -18,24 +18,7 @@
 
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto mob">
-                <li class="nav-item {% if request.path == home_url %}active{% endif %} ">
-                    <a class="nav-link" href="{{ home_url }}">Home </a>
-                </li>
-{#                <li class="nav-item {% if request.path == about_url %}active{% endif %}">#}
-{#                    <a class="nav-link" href="{{ about_url }}">About</a>#}
-{#                </li>#}
-{#                <li class="nav-item {% if request.path == contact_url %}active{% endif %}">#}
-{#                    <a class="nav-link" href="{{ contact_url }}">Contact</a>#}
-{#                </li>#}
-                <li class="nav-item {% if request.path == products_url %}active{% endif %}">
-                    <a class="nav-link" href="{{ products_url }}">Products</a>
-                </li>
 
-                {% if user.user_type == "seller" %}
-                    <li class="nav-item {% if request.path == add_product_url %}active{% endif %}">
-                        <a class="nav-link" href="{{ add_product_url }}">Add Product</a>
-                    </li>
-                {% endif %}
             </ul>
 
             {% include 'search/snippets/search-form.html' %}
@@ -64,7 +47,6 @@
                                    href="{{ logout }}"><strong>Logout</strong></a>
                             </div>
                         </li>
-
                     </ul>
                 </div>
             {% else %}
@@ -72,14 +54,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ cart_home }}">
                             <i class="fas fa-shopping-cart"></i>
-                            <span class="badge badge-pill badge-danger">{{ request.session.cart_items }}</span>
+                            {% if request.session.cart_items >= 1 %}
+                                <span class="badge badge-pill badge-danger ">{{ request.session.cart_items }}</span>
 
+                            {% endif %}
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mob">
                         <a class="nav-link" href="{{ buyerlogin }}">Sign In</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mob">
                         <a class="nav-link" href="{{ buyerregistration }}">Sign Up</a>
                     </li>
                 </ul>
@@ -88,4 +72,35 @@
         </div>
     </div>
 </nav>
-<br><br><br><br>
+<div class="mini-nav mob">
+    <div class="container">
+        <ul class="list-inline mb-0">
+            <li class="list-inline-item {% if request.path == home_url %}active{% endif %}  pr-2 pl-2">
+                <a class="nav-link" href="{{ home_url }}">Home </a>
+            </li>
+            <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                <a class="nav-link" href="{{ products_url }}">All Products</a>
+            </li>
+            <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                <a class="nav-link" href="{{ products_url }}">Jewellery</a>
+            </li>
+            <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                <a class="nav-link" href="{{ products_url }}">Home Decor</a>
+            </li>
+            <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                <a class="nav-link" href="{{ products_url }}">Clothing</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<div class="mob">
+    <br>
+</div>
+<br><br><br><br><br><br>
+
+{% if user.user_type == "seller" %}
+    <div class="btn btn-warning add-product mob">
+        <a class="nav-link" href="{{ add_product_url }}">ADD PRODUCT</a>
+    </div>
+{% endif %}
