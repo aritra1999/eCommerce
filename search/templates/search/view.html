@@ -3,33 +3,40 @@
 
     {% if object_list.count > 0 %}
         <div class="alert alert-primary mb-4 shadow" role="alert">
-            Showing {{ object_list.count }} results for <strong>{{ query }}</strong>.
+            Showing {{ object_list.count }} results for <strong>{{ query }}</strong>!
         </div>
-        <div class="card-columns" >
-        {% for obj in object_list %}
-            <div class="card border-secondary card-list shadow ">
-                <a href="{{ obj.get_absolute_url }}" target="_blank">
-                    <img src="{{ obj.image.url }}" class="card-img p-2" alt="...">
+        <div class="card-columns mob">
+            {% for obj in object_list %}
+                <a href="{{ obj.get_absolute_url }}" target="_blank" style="color: black !important;">
+                    <div class="card border-secondary shadow mb-4 list-card">
+                        <div class="list-img">
+                            <img src="{{ obj.image.url }}" class="card-img p-2" alt="...">
+                        </div>
+                        <div class="card-body list-card-body">
+                            <h6 class="card-title font-weight-bold">
+                                {{ obj.title }}
+                                <span class="badge badge-pill badge-success p-1 pr-2 pl-2 float-right"
+                                      style="font-size: 10px;"
+                                      align="right">{{ obj.category|upper }}</span>
+                            </h6>
+
+                            <div style="margin-top:-10px;">
+                                <small>{{ obj.store_name }}&nbsp;</small>
+                            </div>
+                            <p class="mb-0 mt-2">
+                                <strong>Rs. {{ obj.price }}</strong>
+
+                        </div>
+                    </div>
                 </a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <strong>{{ obj.title }}</strong>
-                        <br>
-                        <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:12px;" align="right">{{ obj.category }}</span>
-                    </h5>
-                    <p><strong>Seller:</strong>&nbsp;{{ obj.seller }}&nbsp;</p>
-                    <hr>
-                    <h5 class="card-text">Rs. {{ obj.price }}</h5>
 
-                </div>
-            </div>
-        {% endfor %}
-
-    </div>
-    {% else %}
-        <div class="alert alert-danger mb-4" role="alert">
-            Sorry no results found for <strong>{{ query }}</strong>.
+            {% endfor %}
         </div>
+    {% else %}
+        <div class="alert alert-danger mb-4 shadow" role="alert">
+            Sorry no results found for <strong>{{ query }}</strong>!
+        </div>
+        {% include 'base/ad.html' %}
         <br>
         <br><br>
     {% endif %}

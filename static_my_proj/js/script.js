@@ -4,7 +4,6 @@ $('#recipeCarousel').carousel({
 
 $('.carousel .carousel-item').each(function () {
     var next = $(this).next();
-    var itemsPerSlide = 4;
     if (!next.length) {
         next = $(this).siblings(':first');
     }
@@ -17,6 +16,10 @@ $('.carousel .carousel-item').each(function () {
     }
 });
 
+
+
+//Will not throw error, even if called multiple times.
+$(window).on('resize', createSlick);
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "300px";

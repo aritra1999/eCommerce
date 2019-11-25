@@ -6,10 +6,13 @@
 {% url 'buyerlogin' as buyerlogin %}
 {% url 'buyerregistration' as buyerregistration %}
 {% url 'logout' as logout %}
+{% url 'placed' as placed %}
 
 
 <nav class="navbar navbar-dark fixed-top notmob" align="center" style="padding-bottom:30px !important;">
-    <a class="navbar-brand btn btn-warning" href="{{ home_url }}"><i class="fas fa-hat-wizard"></i> eComm. </a>
+    <a class="navbar-brand btn btn-warning" href="{{ home_url }}"
+       style="border-radius:30px !important;padding-top:6px !important;padding-bottom:6px !important;"><i
+            class="fas fa-hat-wizard"></i> eComm. </a>
     <ul class="navbar-nav cart-link">
         <li class="nav-item ">
             <a class="nav-link {% if request.path == cart_home %}activemob{% endif %}" href="{{ cart_home }}">
@@ -25,35 +28,93 @@
     <br>
     {% include 'search/snippets/search-form.html' %}
 </nav>
+<div id="bottom-nav">
+    <div class="mobile-bottom-nav">
+        <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+            <div class="mobile-bottom-nav__item-content" align="center">
+                <a class="nav-link {% if request.path == home_url %}activemob{% endif %}" href="{{ home_url }}"> <i
+                        class="fas fa-home"></i> </a>
+            </div>
+        </div>
+        <div class="mobile-bottom-nav__item">
+            <div class="mobile-bottom-nav__item-content" align="center">
+                <a class="nav-link {% if request.path == products_url %}activemob{% endif %}" href="{{ products_url }}">
+                    <i class="fas fa-tshirt"></i> </a>
+            </div>
+        </div>
+        <div class="mobile-bottom-nav__item">
+            <div class="mobile-bottom-nav__item-content" align="center">
+                <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#user-model"#}
+                        style="background:transparent !important;border:none;">
+                    <i class="fas fa-user" style="color: white;"></i>
+                </button>
+            </div>
+        </div>
 
-<div class="bottom-container">
-    <div class="bottom-nav notmob">
-        <ul class="list-inline">
-            <li class="list-inline-item ml-4">
-                <a class="nav-link {% if request.path == home_url %}activemob{% endif %}" href="{{ home_url }}"> <i class="fas fa-home"></i> </a>
-            </li>
-            <li class="list-inline-item ml-4">
-                <a class="nav-link {% if request.path == products_url %}activemob{% endif %}" href="{{ products_url }}"> <i class="fas fa-tshirt"></i> </a>
-            </li>
-            <li class="list-inline-item ml-4 mr-4">
-                <div class="btn-group dropup">
-                    <button type="button" class="btn btn-link" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user" style="color: white;"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        {% if request.user.is_authenticated %}
-                            <a class="dropdown-item" href="#">Welcome {{ user.username }}</a>
-                            <hr>
-                            <a class="dropdown-item" href="#">Account</a>
-                            <a class="dropdown-item" href="{{ logout }}">Logout</a>
-                        {% else %}
-                            <a class="dropdown-item" href="{{ buyerlogin }}">Sign In</a>
-                            <a class="dropdown-item" href="{{ buyerregistration }}">Sign Up</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </li>
-        </ul>
+        <div class="mobile-bottom-nav__item">
+            <div class="mobile-bottom-nav__item-content" align="center">
+                <button type="button" class="btn-link nav-link" data-toggle="modal" data-target="#side-menu"
+                        style="background:transparent !important;border:none;">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="side-menu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered model-xl" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <a class="nav-link text-dark" href="{{ placed }}">All Products</a>
+                <hr>
+                <a class="nav-link text-dark" href="{{ placed }}">Jwellery</a>
+                <hr>
+                <a class="nav-link text-dark" href="{{ placed }}">Home Decor</a>
+                <hr>
+                <a class="nav-link text-dark" href="{{ placed }}">Clothing</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="user-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered model-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                {% if request.user.is_authenticated %}
+                    <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Welcome {{ user.username }}</h5>
+                {% else %}
+                    <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Welcome</h5>
+                {% endif %}
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" align="center">
+                {% if request.user.is_authenticated %}
+                    <a class="nav-link text-dark" href="{{ placed }}">Past Orders</a>
+                    <hr>
+                    <a class="nav-link text-dark" href="{{ placed }}">Profile</a>
+                    <hr>
+                    <a class="nav-link text-dark" href="{{ placed }}">Settings</a>
+                    <hr>
+                    <a class="btn btn-danger btn-sm" href="{{ logout }}">Logout <i class="fas fa-sign-out-alt ml-2"></i></a>
+                {% else %}
+                    <a class="nav-link text-dark" href="{{ buyerlogin }}">Sign In</a>
+                    <hr>
+                    <a class="nav-link text-dark" href="{{ buyerregistration }}">Sign Up</a>
+                    <br>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>

@@ -7,6 +7,7 @@ from .models import Product
 from store.models import Store
 from .forms import AddProductFrom
 from carts.models import Cart
+from orders.models import Placed
 
 
 class ProductFeaturedListView(ListView):
@@ -34,7 +35,7 @@ class ProductDetailSlugView(DetailView):
 
 
 class ProductListView(ListView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by('timestamp')
     template_name = "products/list.html"
 
     def get_queryset(self, *args, **kwargs):
@@ -42,27 +43,7 @@ class ProductListView(ListView):
         return Product.objects.all()
 
 
-# class ProductDetailView(DetailView):
-#     queryset = Product.objects.all()
-#     template_name = "products/detail.html"
-#
-#     def get_context_data(self, *args, **kwargs):
-#         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
-#         context['object'] = Product.objects.all()
-#         context['store'] = Store.objects.get(owner='admin')
-#         return context
-#
-#     def get_object(self, *args, **kwargs):
-#         request = self.request
-#         pk = self.kwargs.get('pk')
-#         instance = Product.objects.get_by_id(pk)
-#         if instance is None:
-#             raise Http404("Product doesn't exist!")
-#         return instance
-#
-#     # def get_store(self, *args, **kwargs):
-#     #     request = self.request
-#     #
+
 
 def product_detail_view(request, slug=None, *args, **kwargs):
     instance = Product.objects.get(slug=slug)
@@ -71,14 +52,16 @@ def product_detail_view(request, slug=None, *args, **kwargs):
 
     owner = instance.seller
     store = Store.objects.get(owner=owner)
-    cart, new = Cart.objects.new_or_get(request)
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
+    product_list = Product.objects.all()
 
-    print(cart)
     context = {
-        "object":instance,
-        "store":store,
-        "cart":cart,
+        "object": instance,
+        "store": store,
+        "cart": cart_obj,
+        "product_list": product_list,
     }
+
     return render(request, "products/detail.html", context)
 
 User = get_user_model()
@@ -108,4 +91,39 @@ def addproduct(request):
                 print("Debug: ", form.errors)
             return render(request, "products/addproduct.html", context)
         return redirect("/products/")
+    return redirect("/products/")
+
+def deleteproduct(request, slug):
+    if request.user.is_authenticated:
+        product = Product.objects.get(slug=slug)
+        if product.seller == request.user:
+            if request.method == "POST":
+                product_id = request._post.get('product_id')
+                Product.objects.filter(id=product_id).delete()
+                return redirect("/")
+            context = {
+                "product": product,
+                "title": "Delete Product?",
+            }
+            return render(request, "products/deleteproduct.html", context)
+        else:
+            return redirect("")
+    else:
+        return redirect("/login/")
+
+def placed_view(request):
+    if request.user.is_authenticated:
+        price = 0
+        orders = Placed.objects.filter(buyer_email=request.user.email)
+        for order in orders:
+            price = price + order.product.price
+        total = {
+            "price":price,
+        }
+        context = {
+            "title":"Previous Orders",
+            "orders":orders,
+            "total": total,
+        }
+        return render(request, "products/placed.html", context)
     return redirect("/products/")

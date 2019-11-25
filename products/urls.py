@@ -5,7 +5,7 @@ from .views import (ProductListView,
                     # ProductFeaturedDetailView,
                     # ProductFeaturedListView,
                     ProductDetailSlugView,
-                    product_detail_view
+                    product_detail_view,
                     )
 
 urlpatterns = [

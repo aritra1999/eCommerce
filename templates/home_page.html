@@ -4,62 +4,12 @@
 {% block content %}
 
     {% if request.user.user_type == 'seller' %}
-        <a class="btn btn-warning btn-block font-weight-bold notmob" href="{%  url 'addproduct' %}">ADD PRODUCT</a>
-        <br>
-        <h3 class="font-weight-bold">Active Products</h3>
-        <hr>
-        <div class="card-columns">
-
-            {% for product in products %}
-                <a href="{{ product.get_absolute_url }}" target="_blank" style="color: black !important;">
-                    <div class="card border-secondary shadow mb-4 list-card">
-                        <div class="list-img">
-                            <img src="{{ product.image.url }}" class="card-img p-2" alt="...">
-                        </div>
-                        <div class="card-body list-card-body">
-                            <h5 class="card-title">
-                                <strong>{{ product.title }}</strong>
-                                <br>
-                                <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:12px;"
-                                      align="right">{{ product.category }}</span>
-                                {#                        <span class="badge badge-pill badge-danger pr-2 pl-2" style="font-size:12px;" align="right">{{ obj.color }}</span>#}
-                            </h5>
-                            <p><strong>Store:</strong>&nbsp;{{ product.store_name }}&nbsp;</p>
-                            <hr>
-                            <h5 class="card-text">Rs. {{ product.price }}</h5>
-
-                        </div>
-                    </div>
-                </a>
-
-            {% endfor %}
-        </div>
-        {#        <div class="card-columns">#}
-        {#            {% for product in products %}#}
-        {#                <div class="card shadow mb-4">#}
-        {#                    <a href="{{ product.get_absolute_url }}" target="_blank">#}
-        {#                        <img src="{{ product.image.url }}" class="card-img p-2" alt="...">#}
-        {#                    </a>#}
-        {#                    <div class="card-body">#}
-        {#                        <h5 class="card-title">#}
-        {#                            <strong>{{ product.title }}</strong>#}
-        {#                            <br>#}
-        {#                            <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:12px;"#}
-        {#                                  align="right">{{ product.category }}</span>#}
-        {#                            <span class="badge badge-pill badge-danger pr-2 pl-2" style="font-size:12px;" align="right">{{ product.color }}</span>#}
-        {#                        </h5>#}
-        {#                        <p><strong>Seller:</strong>&nbsp;{{ product.seller }}&nbsp;</p>#}
-        {#                        <hr>#}
-        {#                        <h5 class="card-text">Rs. {{ product.price }}</h5>#}
-        {##}
-        {#                    </div>#}
-        {#                </div>#}
-        {#            {% endfor %}#}
-        {#        </div>#}
-        <br><br>
-
+        {% include 'seller.html' %}
     {% else %}
+
         {% include 'products/card-carousel.html' %}
+        {% include 'base/ad.html' %}
+
     {% endif %}
 
 {% endblock %}

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway|Roboto|Work+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
 html, body {
     background-color: #F2F5FB;
@@ -9,11 +10,15 @@ html, body {
     /*font-family: 'Work Sans', sans-serif !important;*/
     /*font-family: 'Open Sans', sans-serif !important;*/
     /*font-family: 'Lato', sans-serif !important;*/
-    /*font-family: 'Montserrat', sans-serif !important;*/
-
+    font-family: 'Montserrat', sans-serif !important;
+    /*font-family: 'Poppins', sans-serif !important;*/
     /*font-size:1.1rem;*/
     /*overflow:hidden !important;*/
     min-height: 100%;
+}
+
+.font-weight-bold, strong {
+    font-family: 'Lato', sans-serif !important;
 }
 
 nav {
@@ -28,6 +33,8 @@ nav {
 
 .shadow {
     box-shadow: #DFE2E8 0px 8px 15px !important;
+    /*box-shadow: #051026 0px 8px 15px !important;*/
+
 }
 
 .card-img-top {
@@ -35,13 +42,14 @@ nav {
 }
 
 .btn {
-    border-radius: 30px;
-    padding-right: 1rem !important;
-    padding-left: 1rem !important;
+    border-radius: 3px !important;
+    padding: 8px 30px !important;
+    /*font-weight: bold!important;*/
 }
 
-.btn-primary {
-    background-color: #3e5be8 !important;
+
+.btn-primary, .btn-outline-primary:hover {
+    background-color: #4f64e8 !important;
 }
 
 .card-columns {
@@ -132,14 +140,14 @@ footer a {
 @media (min-width: 768px) {
     .carousel-inner .carousel-item-right.active,
     .carousel-inner .carousel-item-next {
-        /*transform: translateX(33.333%);*/
-        transform: translateX(25%);
+        transform: translateX(33.333%);
+        /*transform: translateX(25%);*/
     }
 
     .carousel-inner .carousel-item-left.active,
     .carousel-inner .carousel-item-prev {
-        /*transform: translateX(-33.333%);*/
-        transform: translateX(-25%);
+        transform: translateX(-33.333%);
+        /*transform: translateX(-25%);*/
     }
 }
 
@@ -197,7 +205,7 @@ footer a {
 }
 
 .mini-nav {
-    margin-top: 70px;
+    margin-top: 74px;
     padding: 2px;
     background: #6351ce;
     /*background: #0c1131;*/
@@ -240,16 +248,27 @@ footer a {
     border-radius: 0px;
 }
 
-.search-form {
-    display: block;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-}
-
 .search-form input {
     border: none !important;
+}
+
+@media only screen and (min-width: 768px) {
+    .search-form {
+        width: 400px !important;
+        margin-right: 30px;
+    }
+
+    .search-form:hover {
+        width: 600px !important;
+        transition: width 250ms ease-in-out;
+    }
+
+    .search-form:active {
+        width: 600px !important;
+    }
+    .mobile-bottom-nav{
+        display: none !important;
+    }
 }
 
 textarea:hover,
@@ -270,20 +289,11 @@ input:focus
     box-shadow: none !important;
 }
 
-.form-btn {
-    padding-right: 50px !important;
-    padding-left: 50px !important;
-}
 
 .bottom-nav {
     background-color: #1c2331;
-    position: fixed;
-    bottom: 10px;
-    /*vertical-align: middle;*/
     border-radius: 40px;
     padding: 10px;
-    margin: 0 auto;
-    width: 300px;
 }
 
 .bottom-nav ul {
@@ -297,12 +307,9 @@ input:focus
 
 
 .bottom-container {
-    /*margin: 0 auto;*/
-
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    padding: 20px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
 }
 
 .dropdown-menu a {
@@ -359,6 +366,65 @@ input:focus
 
 }
 
+.mobile-bottom-nav {
+    font-family: 'Montserrat', sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    transform: translateZ(0);
+    display: flex;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: #a0a0a0;
+    background: #1c2331 !important;
+}
+
+.mobile-bottom-nav__item {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+*:focus {
+    outline: none;
+}
+
+.mobile-bottom-nav__item-content {
+    display: flex;
+    flex-direction: column;
+    font-size: 17px;
+}
+
+.address-page {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.old-address {
+    margin: 0px 20px;
+}
+
+.placed-70-30 {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.placed-30-70 {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    top: -50px !important;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
     .sidenav {
@@ -372,14 +438,24 @@ input:focus
 
 @media only screen and (min-width: 768px) {
     .notmob {
-        display: none;
-
+        display: none !important;
     }
 }
 
 @media only screen and (max-width: 768px) {
     .form-center {
         width: 100%;
+    }
+
+    .product {
+        /*border: 1px solid grey;*/
+        border-radius: 4px;
+        background-color: white;
+    }
+
+    .list-grid {
+        display: grid;
+        grid-template-columns: 50% 50%;
     }
 
     .sidebar {
@@ -449,6 +525,7 @@ input:focus
         padding-bottom: 7px !important;
     }
 
+
     .list-card {
         display: grid;
         grid-template-columns: 50% 50%;
@@ -456,6 +533,10 @@ input:focus
 
     footer {
         /*display: none;*/
+    }
+
+    .address-page {
+        display: block;
     }
 
     .mobile-top-nav {
@@ -473,17 +554,33 @@ input:focus
 
     .search-form {
         display: block;
+        position: absolute;
         margin-left: auto;
         margin-right: auto;
-
-        margin-top: 54px !important;
         width: 93%;
+        margin-top: 54px !important;
         border-radius: .35rem;
         box-shadow: 3px 4px 12px -3px #102e4c29;
+    }
+
+    .search-form input {
+        padding: 22px !important;
     }
 
     .add-product {
         font-weight: bold;
         z-index: 10;
+    }
+
+    .old-address {
+        margin: 0px 0px;
+    }
+
+    .placed-70-30 {
+        display: block;
+    }
+
+    .placed-30-70 {
+        display: block;
     }
 }

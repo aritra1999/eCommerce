@@ -14,20 +14,43 @@
             </div>
         </div>
     {% else %}
-        {#        {% if not object.shipping_address %}#}
-        {#            {% url "checkout_address_create" as checkout_address_create %}#}
-        {#            <div class="form-center shadow">#}
-        {#                <div class="card">#}
-        {#                    <div class="card-body">#}
-        {#                        <h3 class="card-title font-weight-bold" align="center">Shipping Address</h3>#}
-        {#                        <hr>#}
-        {#                        {% include 'addresses/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create address_type='shipping' %}#}
-        {#                    </div>#}
-        {#                </div>#}
-        {#            </div>#}
         {% if not object.billing_address %}
-            <div class="row">
-                <div class="col-6 p-4">
+            <div class="address-page">
+
+
+                <div class="pb-4">
+
+                    <div class="alert alert-primary shadow old-address" role="alert">
+                        <h3 class="card-title font-weight-bold" align="center">
+                            Old Address</h3>
+                        <hr>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <td>Email</td>
+                                <td>{{ old_addresses.last.billing_profile }}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone No.</td>
+                                <td>{{ old_addresses.last.phone_no }}</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>
+                                    {{ old_addresses.last.address_line_1 }}
+                                    <br>
+                                    {{ old_addresses.last.city }} - {{ old_addresses.last.postal_code }}
+                                    <br>
+                                    {{ old_addresses.last.state }}, {{ old_addresses.last.country }}
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
                     {% url "checkout_address_create" as checkout_address_create %}
                     <div class="form shadow">
                         <div class="card">
@@ -40,34 +63,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6 p-4">
-                    <div class="list-group list-group-flush shadow">
-
-{#                        {% for old_address in old_addresses %}#}
-                            <div href="#" class="list-group-item list-group-item-action p-4">
-                                <h3 class="card-title font-weight-bold" align="center">
-                                    Old Address</h3>
-                                <hr>
-                                <p>
-                                    <strong>Email:</strong> {{ old_addresses.first.billing_profile }}
-                                    <br>
-                                    <strong>Address Line 1:</strong> {{ old_addresses.first.address_line_1 }}
-                                    <br>
-                                    {% if old_address.address_line_2 %}
-                                        <strong>Address Line 2:</strong> {{ old_addresses.first.address_line_2 }}
-                                    {% endif %}
-                                    <br>
-                                    {{ old_addresses.first.city }} - {{ old_addresses.first.postal_code }}
-                                    <br>
-                                    {{ old_addresses.first.state }}, {{ old_addresses.first.country }}
-                                </p>
-                            </div>
-{#                        {% endfor %}#}
-                    </div>
-                </div>
             </div>
+
         {% else %}
-            <div class="card shadow" style="width: 85%;margin: auto;">
+            <div class="card shadow place-order">
                 <div class="card-body" align="right">
                     <h4 class="font-weight-bold" align="center">Place Order</h4>
                     <hr>
@@ -125,9 +124,7 @@
                     </div>
                 </div>
             </div>
-            {% for product in cart.products.all %}
-                    {{ product }}
-            {% endfor %}
+
         {% endif %}
     {% endif %}
 

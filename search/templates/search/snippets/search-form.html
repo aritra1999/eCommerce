@@ -1,11 +1,13 @@
-<form method="GET" action='{% url "search:query" %}' class="form mr-4 search-form">
-    <div class="input-group search-form-shadow input-group-lg">
-{#        {% if window.screen.height <= 768 %}input-group-lg{% endif %}#}
-        <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search"
-               value="{{ request.GET.q }}"
-                style="border-top-left-radius: .35rem;border-bottom-left-radius: .35rem;">
-        <span class="input-group-append">
-            <button class="search-btn btn-warning" type="submit"><i class="fas fa-search"></i></button>
+{#<div class="float mr-5">#}
+    <form method="GET" action='{% url "search:query" %}' class="form search-form">
+        <div class="input-group search-form-shadow">
+            {#        {% if window.screen.height <= 768 %}input-group-lg{% endif %}#}
+            <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search"
+                   value="{{ request.GET.q }}"
+                   style="border-top-left-radius: .35rem;border-bottom-left-radius: .35rem;" required/>
+            <span class="input-group-append">
+            <button class="search-btn btn-warning " type="submit">&nbsp;<i class="fas fa-search"></i>&nbsp;</button>
         </span>
-    </div>
-</form>
+        </div>
+    </form>
+{#</div>#}

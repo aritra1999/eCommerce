@@ -1,7 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="card-columns">
+    <div class="notmob list-grid">
+        {% for obj in object_list %}
+            <a href="{{ obj.get_absolute_url }}" target="_blank" style="color: black !important;">
+                <div class="product m-1 shadow">
+                    <div class="list-img">
+                        <img src="{{ obj.image.url }}" class="card-img p-1" alt="...">
+                    </div>
+                    <div class="list-card-body p-3 pt-3">
+                        <h6 class="card-title font-weight-bold">
+                            {{ obj.title }}
+                            <span class="badge badge-pill badge-success p-1 pr-2 pl-2 float-right"
+                                  style="font-size: 10px;"
+                                  align="right">{{ obj.category|upper }}</span>
+                        </h6>
 
+                        <div style="margin-top:-10px;">
+                            <small>{{ obj.store_name }}&nbsp;</small>
+                        </div>
+                        <p class="mb-0 mt-2">
+                            <strong>Rs. {{ obj.price }}</strong>
+                        </p>
+                    </div>
+                </div>
+            </a>
+
+        {% endfor %}
+    </div>
+    <div class="card-columns mob">
         {% for obj in object_list %}
             <a href="{{ obj.get_absolute_url }}" target="_blank" style="color: black !important;">
                 <div class="card border-secondary shadow mb-4 list-card">
@@ -9,21 +35,21 @@
                         <img src="{{ obj.image.url }}" class="card-img p-2" alt="...">
                     </div>
                     <div class="card-body list-card-body">
-                        <h5 class="card-title">
-                            <strong>{{ obj.title }}</strong>
-                            <br>
-                            <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:12px;"
-                                  align="right">{{ obj.category }}</span>
-                            {#                        <span class="badge badge-pill badge-danger pr-2 pl-2" style="font-size:12px;" align="right">{{ obj.color }}</span>#}
-                        </h5>
-                        <p><strong>Store:</strong>&nbsp;{{ obj.store_name }}&nbsp;</p>
-                        <hr>
-                        <h5 class="card-text">Rs. {{ obj.price }}</h5>
+                        <h6 class="card-title font-weight-bold">
+                            {{ obj.title }}
+                            <span class="badge badge-pill badge-success p-1 pr-2 pl-2 float-right"
+                                  style="font-size: 10px;"
+                                  align="right">{{ obj.category|upper }}</span>
+                        </h6>
 
+                        <div style="margin-top:-10px;">
+                            <small>{{ obj.store_name }}&nbsp;</small>
+                        </div>
+                        <p class="mb-0 mt-2">
+                            <strong>Rs. {{ obj.price }}</strong>
                     </div>
                 </div>
             </a>
-
         {% endfor %}
     </div>
 
@@ -168,14 +194,16 @@
             </div>
         </div>
         <div class="apply mt-3" align="center">
-            <button type="button" class="btn btn-primary pl-5 pr-5 shadow" style="min-width: 200px;">Apply Filters
+            <button type="button" class="btn btn-primary pl-5 pr-5 shadow btn-sm" style="min-width: 200px;">Apply
+                Filters
             </button>
         </div>
         <br><br>
     </div>
 
-    <div id="main" class="sidenav-button"  style="cursor:pointer" onclick="openNav()">
+    <div id="main" class="sidenav-button" style="cursor:pointer" onclick="openNav()">
         <i class="fas fa-filter"></i>
+        {#        <i class="far fa-filter"></i>#}
     </div>
 
 

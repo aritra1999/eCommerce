@@ -1,2 +1,8 @@
 from django.shortcuts import render
-# Create your views here.
+
+def store_view(request):
+    user = request.user
+    context = {
+
+    }
+    return render(request, "orders/store.html", context)

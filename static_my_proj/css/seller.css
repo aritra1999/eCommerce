@@ -1,0 +1,15 @@
+.active-list{
+    display:grid;
+    grid-template-columns: 50% 50%;
+}
+@media only screen and (max-width: 768px) {
+    .active-list{
+        display:block;
+    }
+    .list-card{
+        display: block;
+    }
+    .list-img{
+        height: 320px;
+    }
+}

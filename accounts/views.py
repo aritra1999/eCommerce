@@ -33,6 +33,9 @@ def login_page(request):
     context = {
         "form": form
     }
+    if request.user.is_authenticated:
+        return redirect('/')
+
     next_ = request.GET.get('next')
     next_post = request.POST.get('next')
     redirect_path = next_ or next_post or None
@@ -65,6 +68,8 @@ def login_page(request):
 
 def register_page(request):
     form = RegisterForm(request.POST or None)
+    if request.user.is_authenticated:
+        return redirect('/')
     context = {
         "title": "Login",
         "content": "Login",

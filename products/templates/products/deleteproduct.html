@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="card shadow">
+        <div class="card-body">
+            <p>
+            <h3 class="font-weight-bold">Product to be deleted</h3>
+            <article>
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4 p-3 my-auto mx-auto">
+                            <img src="{{ product.image.url }}" class="card-img mb-3" alt="...">
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body" style="padding:20px 20px 20px 20px;">
+                                <h4 class="card-title text-dark font-weight-bold" style="display: inline;">
+                                    {{ product.title }}
+                                </h4>
+                                <span class="badge badge-pill badge-success pr-2 pl-2 float-right"
+                                      style="font-size:13px;display: inline;"
+                                      align="right">{{ product.category }}</span>
+                                <hr>
+                                <p class="card-text text-dark">
+                                    {{ product.description|truncatewords:30 }}
+                                </p>
+                                <h5 class="card-text text-dark"><i class="fas fa-rupee-sign"></i>
+                                    <strong>{{ product.price }} </strong></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            </p>
+            <form action="" method="POST">{% csrf_token %}
+                <input type="hidden" value="{{ product.id }}" name="product_id"/>
+                Are you sure you want to delete this product?
+                <button type="submit" class="btn btn-danger btn-small float-right">Delete <i class="far fa-trash-alt ml-2"></i></button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

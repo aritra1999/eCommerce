@@ -17,45 +17,45 @@
                       style="border-top:none !important;border-right:none !important;border-left:none !important;border-radius: 0px;"> +91 </span>
             </div>
             <input type="text" name="phone_no" class="form-control textinput textInput form-control"
-                   placeholder="Phone Number" value="{{ old.first.phone_no }}" id="id_phone_no">
+                   placeholder="Phone Number" value="{{ old.last.phone_no }}" id="id_phone_no">
         </div>
     </div>
     <div id="div_id_address_line_1" class="form-group">
         <label for="id_address_line_1" class="col-form-label  requiredField">Address 1<span
                 class="asteriskField">*</span> </label>
         <div class=""><input type="text" name="address_line_1" class="form-control textinput textInput form-control"
-                             placeholder="Address line 1" value="{{ old.first.address_line_1 }}" maxlength="120"
+                             placeholder="Address line 1" value="{{ old.last.address_line_1 }}" maxlength="120"
                              required id="id_address_line_1"></div>
     </div>
     <div id="div_id_address_line_2" class="form-group"><label for="id_address_line_2" class="col-form-label ">
         Address 2 (Optional)
     </label>
         <div class=""><input type="text" name="address_line_2" class="form-control textinput textInput form-control"
-                             placeholder="Address line 2" value="{{ old.first.address_line_2 }}" maxlength="120"
+                             placeholder="Address line 2" value="{{ old.last.address_line_2 }}" maxlength="120"
                              id="id_address_line_2"></div>
     </div>
     <div id="div_id_city" class="form-group"><label for="id_city" class="col-form-label  requiredField">
         City<span class="asteriskField">*</span> </label>
         <div class=""><input type="text" name="city" class="form-control textinput textInput form-control"
-                             placeholder="Enter city" value="{{ old.first.city }}" maxlength="120" required
+                             placeholder="Enter city" value="{{ old.last.city }}" maxlength="120" required
                              id="id_city"></div>
     </div>
     <div id="div_id_country" class="form-group"><label for="id_country" class="col-form-label  requiredField">
         Country<span class="asteriskField">*</span> </label>
-        <div class=""><input type="text" name="country" value="{{ old.first.country }}"
+        <div class=""><input type="text" name="country" value="{{ old.last.country }}"
                              class="form-control textinput textInput form-control" placeholder="Enter country"
                              maxlength="120" required id="id_country"></div>
     </div>
     <div id="div_id_state" class="form-group"><label for="id_state" class="col-form-label  requiredField">
         State<span class="asteriskField">*</span> </label>
         <div class=""><input type="text" name="state" class="form-control textinput textInput form-control"
-                             placeholder="Enter state" value="{{ old.first.state }}" maxlength="120" required
+                             placeholder="Enter state" value="{{ old.last.state }}" maxlength="120" required
                              id="id_state"></div>
     </div>
     <div id="div_id_postal_code" class="form-group"><label for="id_postal_code" class="col-form-label  requiredField">
         Postal code<span class="asteriskField">*</span> </label>
         <div class=""><input type="text" name="postal_code" class="form-control textinput textInput form-control"
-                             placeholder="Enter postal code" value="{{ old.first.postal_code }}" maxlength="120"
+                             placeholder="Enter postal code" value="{{ old.last.postal_code }}" maxlength="120"
                              required id="id_postal_code"></div>
     </div>
 

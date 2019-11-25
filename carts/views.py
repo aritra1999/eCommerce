@@ -8,16 +8,22 @@ from addresses.forms import AddressForm
 from addresses.models import Address
 from accounts.forms import LoginForm, GuestForm
 from django.contrib.auth import get_user_model
+from store.models import Store
+from orders.forms import PlacedForm
+from orders.models import Placed
 
 User = get_user_model()
+
+
 def cart_home(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     product_list = Product.objects.all()
     context = {
         "cart": cart_obj,
-        "product_list":product_list,
+        "product_list": product_list,
     }
     return render(request, "carts/home.html", context)
+
 
 def cart_update(request):
     product_id = request.POST.get('product_id')
@@ -36,7 +42,6 @@ def cart_update(request):
             added = True
         request.session['cart_items'] = cart_obj.products.count()
     return redirect("cart:home")
-
 
 
 def checkout_home(request):
@@ -69,13 +74,22 @@ def checkout_home(request):
             order_obj.save()
 
     if request.method == "POST":
-        "Some check that order is done"
         is_done = order_obj.check_done()
         if is_done:
-            order_obj.mark_paid()
-            request.session['cart_items'] = 0
-            del request.session['cart_id']
-            return redirect("cart:success")
+            placedform = PlacedForm(request.POST or None)
+            if placedform.is_valid():
+                for product in cart_obj.products.all():
+                    store = Store.objects.get(owner=product.seller)
+                    destination = order_obj.billing_address
+                    store_name = store.store_name
+                    buyer_email = billing_profile.email
+
+                    p = Placed.objects.create(product=product, store_name=store_name,store=store,buyer_address=destination, buyer_email=buyer_email)
+
+                order_obj.mark_paid()
+                request.session['cart_items'] = 0
+                del request.session['cart_id']
+                return redirect("cart:success")
 
     if request.user.is_authenticated:
         old_billing_profile = BillingProfile.objects.get(user=request.user)
@@ -83,28 +97,28 @@ def checkout_home(request):
     else:
         old_addresses = ""
 
-
     # cart_qs = Cart.objects.get(user=request.user)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
 
     context = {
-        "product_list":product_list,
+        "product_list": product_list,
         "object": order_obj,
         "billing_profile": billing_profile,
         "login_form": login_form,
         "guest_form": guest_form,
         "address_form": address_form,
-        "old_addresses":old_addresses,
-        "cart":cart_obj,
+        "old_addresses": old_addresses,
+        "cart": cart_obj,
 
     }
     return render(request, "carts/checkout.html", context)
+
 
 def checkout_done_view(request):
     obj = Product.objects.all()
     cart = Cart.objects.all()
     product_list = Product.objects.all()
-    context ={
+    context = {
         "title": "eComm | Success",
         "obj": obj,
         "product_list": product_list,

@@ -7,16 +7,19 @@
 {% url 'buyerregistration' as buyerregistration %}
 {% url 'logout' as logout %}
 {% url 'addproduct' as add_product_url %}
+{% url 'placed' as placed %}
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top mob">
-    <div class="container">
-        <a class="navbar-brand btn btn-warning" href="{{ home_url }}"><i class="fas fa-hat-wizard"></i> eComm.</a>
+{#    <div class="container">#}
+        <a class="navbar-brand btn btn-warning ml-5" href="{{ home_url }}"
+           style="border-radius:30px !important;padding-top:6px !important;padding-bottom:6px !important;"><i
+                class="fas fa-hat-wizard"></i> eComm.</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-search"></i>
         </button>
 
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <div class="collapse navbar-collapse mr-5" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto mob">
 
             </ul>
@@ -38,13 +41,13 @@
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ user.username }}
                             </a>
+                            <div class="dropdown-menu p-2 pt-3 w-25" aria-labelledby="dropdownMenuButton">
 
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Account</a>
-                                <a class="dropdown-item" href="{{ cart_home }}">Cart</a>
-
-                                <a class="dropdown-item" style="color: crimson"
-                                   href="{{ logout }}"><strong>Logout</strong></a>
+                                <a class="dropdown-item" href="{{ placed }}">Past Orders</a>
+                                <a class="dropdown-item" href="{{ placed }}">Profile</a>
+                                <a class="dropdown-item" href="{{ placed }}">Settings</a>
+                                <a role="button" class="btn btn-sm btn-danger btn-block" href="{{ logout }}"
+                                   style="color: white !important;">Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -70,26 +73,41 @@
             {% endif %}
 
         </div>
-    </div>
+{#    </div>#}
 </nav>
 <div class="mini-nav mob">
     <div class="container">
         <ul class="list-inline mb-0">
-            <li class="list-inline-item {% if request.path == home_url %}active{% endif %}  pr-2 pl-2">
-                <a class="nav-link" href="{{ home_url }}">Home </a>
-            </li>
-            <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
-                <a class="nav-link" href="{{ products_url }}">All Products</a>
-            </li>
-            <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
-                <a class="nav-link" href="{{ products_url }}">Jewellery</a>
-            </li>
-            <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
-                <a class="nav-link" href="{{ products_url }}">Home Decor</a>
-            </li>
-            <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
-                <a class="nav-link" href="{{ products_url }}">Clothing</a>
-            </li>
+            {% if request.user.user_type == "seller" %}
+                <li class="list-inline-item {% if request.path == home_url %}active{% endif %}  pr-2 pl-2">
+                    <a class="nav-link" href="{{ home_url }}">Home </a>
+                </li>
+                <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                    <a class="nav-link" href="{{ products_url }}">All Products</a>
+                </li>
+                <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                    <a class="nav-link" href="{{ products_url }}">Add Products</a>
+                </li>
+                <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                    <a class="nav-link" href="{{ products_url }}">Orders</a>
+                </li>
+            {% else %}
+                <li class="list-inline-item {% if request.path == home_url %}active{% endif %}  pr-2 pl-2">
+                    <a class="nav-link" href="{{ home_url }}">Home </a>
+                </li>
+                <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                    <a class="nav-link" href="{{ products_url }}">All Products</a>
+                </li>
+                <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                    <a class="nav-link" href="{% url 'search:query' %}?q=hat">Jewellery</a>
+                </li>
+                <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                    <a class="nav-link" href="{% url 'search:query' %}?q=black">Home Decor</a>
+                </li>
+                <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
+                    <a class="nav-link" href="{% url 'search:query' %}?q=food">Clothing</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 

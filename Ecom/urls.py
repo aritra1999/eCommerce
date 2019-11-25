@@ -10,7 +10,7 @@ from .views import home_page, contact_page, about_page
 from addresses.views import (
     checkout_address_create_view,
 )
-from products.views import addproduct
+from products.views import addproduct, placed_view, deleteproduct
 # from carts.views import cart_home
 from store.views import store_registration_view
 from django.contrib.auth.views import LogoutView
@@ -30,6 +30,8 @@ urlpatterns = [
     url(r'^products/',include(('products.urls', 'products'), namespace='products')),
     url(r'^search/', include(('search.urls', 'search'), namespace='search')),
     url(r'^cart/', include(('carts.urls', 'carts') , namespace='cart')),
+    url(r'^placed/', placed_view, name="placed"),
+    url(r'^delete/(?P<slug>[\w-]+)/$', deleteproduct, name="delete"),
     # url(r'^carts/', include(('carts.urls', 'carts'), namespace='carts')),
 ]
 

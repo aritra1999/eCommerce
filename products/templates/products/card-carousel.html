@@ -1,26 +1,28 @@
-
 <div class="row mx-auto my-auto">
     <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-        <div class="carousel-inner w-100" role="listbox" style="height:600px">
+        <div class="carousel-inner w-100 pl-5 pr-5" role="listbox" style="height:500px">
             {% for obj in product_list %}
                 <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card shadow mb-3">
                             <a href="{{ obj.get_absolute_url }}" target="_blank">
                                 <div class="list-img carousel-img">
-                                    <img src="{{ obj.image.url }}" class="card-img p-2" alt="...">
+                                    <img src="{{ obj.image.url }}" class="card-img p-4" alt="...">
                                 </div>
                             </a>
                             <div class="card-body">
-                                <h5 class="card-title">
-                                    <strong>{{ obj.title }}</strong>
-                                    <br>
-                                    <span class="badge badge-pill badge-success pr-2 pl-2" style="font-size:12px;"
-                                          align="right">{{ obj.category }}</span>
-                                </h5>
-                                <p><strong>Seller:</strong>&nbsp;{{ obj.seller }}&nbsp;</p>
-                                <hr>
-                                <h5 class="card-text">Rs. {{ obj.price }}</h5>
+                                <h6 class="card-title font-weight-bold">
+                                    {{ obj.title }}
+                                    <span class="badge badge-pill badge-success p-1 pr-2 pl-2 float-right"
+                                          style="font-size: 10px;"
+                                          align="right">{{ obj.category|upper }}</span>
+                                </h6>
+
+                                <div style="margin-top:-10px;">
+                                    <small>{{ obj.store_name }}&nbsp;</small>
+                                </div>
+                                <p class="mb-0 mt-2">
+                                    <strong>Rs. {{ obj.price }}</strong>
 
                             </div>
                         </div>

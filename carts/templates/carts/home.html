@@ -2,24 +2,28 @@
 
 {% block content %}
 
-    <h3 class="card-title font-weight-bold" >Cart</h3>
+    <h3 class="card-title font-weight-bold">Cart</h3>
 
     {% if cart.products.exists %}
-        <div class="row">
-            <div class="col-9 full">
+        <div class="placed-70-30">
+            <div class="m-2">
                 {% for product in cart.products.all %}
                     <a href='{{ product.get_absolute_url }}' target="_blank" class="">
                         <div class="card mb-3 shadow">
                             <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="{{ product.image.url }}" class="card-img m-3" alt="...">
+                                <div class="col-md-4 p-3 my-auto mx-auto">
+                                    <img src="{{ product.image.url }}" class="card-img mb-3" alt="...">
+                                    <div align="center">
+                                        {% include 'products/update-cart.html' with product_id=product.id cart=cart in_cart=True %}
+                                    </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body" style="padding:20px 40px 20px 40px;">
+                                    <div class="card-body" style="padding:20px 20px 20px 20px;">
                                         <h4 class="card-title text-dark font-weight-bold" style="display: inline;">
                                             {{ product.title }}
                                         </h4>
-                                        <span class="badge badge-pill badge-success pr-2 pl-2 float-right" style="font-size:13px;display: inline;"
+                                        <span class="badge badge-pill badge-success pr-2 pl-2 float-right"
+                                              style="font-size:13px;display: inline;"
                                               align="right">{{ product.category }}</span>
                                         <hr>
                                         <div class="alert alert-primary mt-3" role="alert">
@@ -34,8 +38,8 @@
                                         </p>
                                         <h5 class="card-text text-dark"><i class="fas fa-rupee-sign"></i>
                                             <strong>{{ product.price }} </strong></h5>
-                                        <hr>
-                                        {% include 'products/update-cart.html' with product_id=product.id cart=cart in_cart=True %}
+
+
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +48,7 @@
 
                 {% endfor %}
             </div>
-            <div class="col-3 full">
+            <div class="m-2">
                 <div class="card shadow">
                     <div class="card-body" align="right">
                         <h4 class="font-weight-bold" align="center">Order Summary</h4>
@@ -58,7 +62,7 @@
                         <p class="text-danger">Shipping Charges: + 50.00 </p>
                         <br>
                         <div align="center">
-                            <a class='btn btn-success btn-block' href='{% url "cart:checkout" %}'>Checkout</a>
+                            <a class='btn btn-success btn-block btn-sm' href='{% url "cart:checkout" %}'>Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -68,7 +72,7 @@
     {% else %}
         <br>
         <div class="alert alert-danger" role="alert">
-            Cart is Empty
+            Cart is Empty!
         </div>
     {% endif %}
     <br><br>
