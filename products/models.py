@@ -9,6 +9,12 @@ from django.conf import settings
 
 from Ecom.utils import unique_slug_generator, get_filename
 
+CATEGORY = (
+    ('jewellery', 'Jewellery'),
+    ('homedecor', 'Home Decor'),
+    ('clothing', 'Clothing'),
+)
+
 
 # from store.models import Store
 
@@ -81,7 +87,7 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     featured = models.BooleanField(default=False)
-    category = models.CharField(max_length=120)
+    category = models.CharField(max_length=120, choices=CATEGORY)
     color = models.CharField(max_length=120, blank=True, null=True)
     active = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now_add=True)

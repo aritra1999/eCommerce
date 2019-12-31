@@ -258,15 +258,15 @@ footer a {
         margin-right: 30px;
     }
 
-    .search-form:hover {
+    .search-form:focus, .search-form:hover {
         width: 600px !important;
         transition: width 250ms ease-in-out;
     }
 
-    .search-form:active {
-        width: 600px !important;
-    }
-    .mobile-bottom-nav{
+    /*.search-form:active {*/
+    /*    width: 600px !important;*/
+    /*}*/
+    .mobile-bottom-nav {
         display: none !important;
     }
 }
@@ -300,6 +300,13 @@ input:focus
     margin-bottom: 0rem;
 }
 
+.testheight {
+    height: 1200px;
+    font-size: 20px;
+    text-align: center;
+    padding: 100px 20px;
+}
+
 /*.list-inline-item {*/
 /*    margin-right: 14px !important;*/
 /*    margin-left: 14px !important;*/
@@ -316,44 +323,6 @@ input:focus
     color: black !important;
 }
 
-.sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 2000; /* Stay on top */
-    top: 0; /* Stay at the top */
-    right: 0;
-    background-color: #ffffff; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 30px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-}
-
-/* The navigation menu links */
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
     transition: margin-left .5s;
     padding: 15px 15px 11px 18px;
@@ -372,9 +341,10 @@ input:focus
     bottom: 0;
     left: 0;
     right: 0;
+    border: 2px solid white;
     z-index: 1000;
-    margin-right: 2%;
-    margin-left: 2%;
+    margin-right: 6%;
+    margin-left: 6%;
     margin-bottom: 2%;
     transform: translateZ(0);
     display: flex;
@@ -392,6 +362,7 @@ input:focus
     flex-direction: column;
     justify-content: center;
 }
+
 *:focus {
     outline: none;
 }
@@ -400,6 +371,11 @@ input:focus
     display: flex;
     flex-direction: column;
     font-size: 17px;
+}
+
+.list-grid {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
 }
 
 .address-page {
@@ -423,6 +399,25 @@ input:focus
 
 .carousel-control-next, .carousel-control-prev {
     top: -50px !important;
+}
+
+.scroll-top {
+    padding: 19px 24px !important;
+    border-radius: 50% !important;
+    position: fixed;
+    z-index: 1000;
+    bottom: 8 ma0px;
+    right: 18px;
+    display: none;
+    background-color: #1c2331 !important;
+    border: 2px solid #FFC107;
+    color: #FFC107 !important;
+}
+
+.scroll-top i {
+    display: inline-block;
+    color: #FFC107 !important;
+    border-radius: 200px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -464,11 +459,10 @@ input:focus
 
     .card-columns {
         column-count: 1;
-
     }
 
     .list-img {
-        height: 200px;
+        height: 270px;
     }
 
     .carousel-img {
@@ -557,7 +551,7 @@ input:focus
         position: absolute;
         margin-left: auto;
         margin-right: auto;
-        width: 93%;
+        width: 94%;
         margin-top: 54px !important;
         border-radius: .35rem;
         box-shadow: 3px 4px 12px -3px #102e4c29;
@@ -582,5 +576,11 @@ input:focus
 
     .placed-30-70 {
         display: block;
+    }
+
+    .scroll-top {
+        position: fixed;
+        bottom: 85px;
+        right: 18px;
     }
 }

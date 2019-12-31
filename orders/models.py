@@ -73,6 +73,7 @@ class Order(models.Model):
 
         return self.status
 
+
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
         instance.order_id = unique_order_id_generator(instance)
@@ -108,13 +109,16 @@ def post_save_order(sender, instance, created, *args, **kwargs):
 
 post_save.connect(post_save_order, sender=Order)
 
+
 class Placed(models.Model):
+    order_id = models.CharField(max_length=6, null=True, blank=True, unique=True)
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE, unique=False)
     store = models.ForeignKey(Store, null=True, blank=True, on_delete=models.CASCADE, unique=False)
     store_name = models.CharField(max_length=100, null=True, blank=True)
     buyer_address = models.ForeignKey(Address, null=True, blank=True, on_delete=models.CASCADE, unique=False)
     buyer_email = models.CharField(max_length=100, null=True, blank=True)
     date_placed = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return get_random_string(length=6)
+        return self.order_id

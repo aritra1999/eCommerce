@@ -6,6 +6,7 @@ from products.models import Product
 from orders.models import Placed
 from store.models import Store
 
+
 def home_page(request):
     product_list = Product.objects.all().order_by('-timestamp')
     seller = request.user
@@ -13,14 +14,14 @@ def home_page(request):
     if seller.is_authenticated and seller.user_type == "seller":
         products = Product.objects.seller_product(seller).order_by('-timestamp')
         store = Store.objects.get(owner=seller)
-        order_recived = Placed.objects.filter(store=store)
+        order_received = Placed.objects.filter(store=store)
         context = {
             "title": "Home",
             "content": "Hello World",
             "product_list": product_list,
             "products": products,
-            "order_recived":order_recived,
-            "store":store,
+            "order_received": order_received,
+            "store": store,
         }
     else:
         context = {

@@ -1,15 +1,32 @@
-.active-list{
-    display:grid;
-    grid-template-columns: 50% 50%;
+.active-list {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
 }
+
+.order-object {
+    border: 1px solid #bcbcbc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+}
+
 @media only screen and (max-width: 768px) {
-    .active-list{
-        display:block;
+    .active-list {
+        display: block;
+        /*grid-template-columns: 50% 50%;*/
     }
-    .list-card{
+
+    .list-card {
         display: block;
     }
-    .list-img{
-        height: 320px;
+
+    .list-img {
+        height: 200px;
+        margin-bottom: 10px;
+    }
+
+    .active-products {
+        display: grid !important;
+        grid-template-columns: 40% 60%;
     }
 }

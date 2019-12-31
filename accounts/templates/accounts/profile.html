@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="card shadow">
+        <div class="card-body">
+            <h4>{{ user.name }}</h4>
+            <table class="table table-borderless">
+                <tbody>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Username</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">User Type</th>
+                    <td>{{ user.user_type }}</td>
+                </tr>
+
+            </table>
+            {% if store %}
+                <hr>
+                <h4>{{ store }}</h4>
+                <table class="table table-borderless">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Owner Username</th>
+                        <td>{{ store.owner }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Address</th>
+                        <td>{{ store.address }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Location</th>
+                        <td> {{ store.postal_code }} - {{ store.city }}, {{ store.state }}, {{ store.country }} </td>
+                    </tr>
+
+                </table>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -16,16 +16,20 @@ $('.carousel .carousel-item').each(function () {
     }
 });
 
+$(document).ready(function () {
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('.scroll-top').fadeIn();
+        } else {
+            $('.scroll-top').fadeOut();
+        }
+    });
 
+    $('.scroll-top').click(function () {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 500);
+        return false;
+    });
 
-//Will not throw error, even if called multiple times.
-$(window).on('resize', createSlick);
-
-function openNav() {
-    document.getElementById("mySidenav").style.width = "300px";
-}
-
-/* Set the width of the side navigation to 0 */
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
+});

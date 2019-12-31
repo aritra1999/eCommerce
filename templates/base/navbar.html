@@ -8,6 +8,8 @@
 {% url 'logout' as logout %}
 {% url 'addproduct' as add_product_url %}
 {% url 'placed' as placed %}
+{% url 'edit' as edit %}
+{% url 'profile' as profile %}
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top mob">
 {#    <div class="container">#}
@@ -44,8 +46,8 @@
                             <div class="dropdown-menu p-2 pt-3 w-25" aria-labelledby="dropdownMenuButton">
 
                                 <a class="dropdown-item" href="{{ placed }}">Past Orders</a>
-                                <a class="dropdown-item" href="{{ placed }}">Profile</a>
-                                <a class="dropdown-item" href="{{ placed }}">Settings</a>
+                                <a class="dropdown-item" href="{{ profile }}">Profile</a>
+                                <a class="dropdown-item" href="{{ edit }}">Settings</a>
                                 <a role="button" class="btn btn-sm btn-danger btn-block" href="{{ logout }}"
                                    style="color: white !important;">Logout</a>
                             </div>
@@ -86,7 +88,7 @@
                     <a class="nav-link" href="{{ products_url }}">All Products</a>
                 </li>
                 <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
-                    <a class="nav-link" href="{{ products_url }}">Add Products</a>
+                    <a class="nav-link" href="{{ add_product_url }}">Add Products</a>
                 </li>
                 <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
                     <a class="nav-link" href="{{ products_url }}">Orders</a>
@@ -99,13 +101,13 @@
                     <a class="nav-link" href="{{ products_url }}">All Products</a>
                 </li>
                 <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
-                    <a class="nav-link" href="{% url 'search:query' %}?q=hat">Jewellery</a>
+                    <a class="nav-link" href="{% url 'search:query' %}?q=Jewellery">Jewellery</a>
                 </li>
                 <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
-                    <a class="nav-link" href="{% url 'search:query' %}?q=black">Home Decor</a>
+                    <a class="nav-link" href="{% url 'search:query' %}?q=Home Decor">Home Decor</a>
                 </li>
                 <li class="list-inline-item {% if request.path == products_url %}active{% endif %} pr-2 pl-2">
-                    <a class="nav-link" href="{% url 'search:query' %}?q=food">Clothing</a>
+                    <a class="nav-link" href="{% url 'search:query' %}?q=Clothing">Clothing</a>
                 </li>
             {% endif %}
         </ul>

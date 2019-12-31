@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.utils.crypto import get_random_string
 
 from orders.models import Order
 from products.models import Product
@@ -84,7 +85,10 @@ def checkout_home(request):
                     store_name = store.store_name
                     buyer_email = billing_profile.email
 
-                    p = Placed.objects.create(product=product, store_name=store_name,store=store,buyer_address=destination, buyer_email=buyer_email)
+                    order_id = get_random_string(length=6)
+
+                    p = Placed.objects.create(order_id=order_id,product=product, store_name=store_name, store=store,
+                                              buyer_address=destination, buyer_email=buyer_email)
 
                 order_obj.mark_paid()
                 request.session['cart_items'] = 0
