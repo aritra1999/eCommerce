@@ -25,7 +25,7 @@ SECRET_KEY = '881=@+c23h*2+m0@9x$gt&=ws!eqj!kfe%9b2v#i&yfm2%^mxk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','localhost','192.168.43.189','10.2.240.144', '10.5.115.140']
+ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','localhost', 'ecommdemo.herokuapp.com']
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -131,14 +132,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static_my_proj/'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_my_proj'),
 ]
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
 
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
+STATIC_URL = '/static_my_proj/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn", "static_root")
+
+
+# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn", "media_root")
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
